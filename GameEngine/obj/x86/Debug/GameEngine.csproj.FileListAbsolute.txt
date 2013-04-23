@@ -13,3 +13,5 @@ D:\GameEngine\GameEngine\obj\x86\Debug\GameEngine.exe
 D:\GameEngine\GameEngine\obj\x86\Debug\GameEngine.pdb
 D:\GameEngine\GameEngine\bin\Debug\Content\tyrian.xnb
 D:\GameEngine\GameEngine\bin\Debug\Content\tex.xnb
+D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Debug\GameEngine.exe
+D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Debug\GameEngine.pdb
