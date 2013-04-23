@@ -1,0 +1,15 @@
+D:\GameEngine\GameEngine\bin\Debug\Content\tiles2.xnb
+D:\GameEngine\GameEngine\bin\Debug\GameEngine.exe
+D:\GameEngine\GameEngine\bin\Debug\GameEngine.pdb
+D:\GameEngine\GameEngine\bin\Debug\Lidgren.Network.dll
+D:\GameEngine\GameEngine\bin\Debug\MonoGame.Framework.Windows.dll
+D:\GameEngine\GameEngine\bin\Debug\OpenTK.dll
+D:\GameEngine\GameEngine\bin\Debug\Tao.Sdl.dll
+D:\GameEngine\GameEngine\bin\Debug\Lidgren.Network.Windows.dll
+D:\GameEngine\GameEngine\bin\Debug\Lidgren.Network.xml
+D:\GameEngine\GameEngine\bin\Debug\Lidgren.Network.Windows.xml
+D:\GameEngine\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache
+D:\GameEngine\GameEngine\obj\x86\Debug\GameEngine.exe
+D:\GameEngine\GameEngine\obj\x86\Debug\GameEngine.pdb
+D:\GameEngine\GameEngine\bin\Debug\Content\tyrian.xnb
+D:\GameEngine\GameEngine\bin\Debug\Content\tex.xnb
