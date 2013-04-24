@@ -41,13 +41,13 @@ namespace GameEngine
         {
             // TODO: Add your initialization logic here
             texture = this.Content.Load<Texture2D>("tex");
-            this.graphics.IsFullScreen = true;
+            //this.graphics.IsFullScreen = true;
 
 
             TileCatalog cat = new TileCatalog(texture, 15, 15);
             Random rand = new Random(DateTime.Now.Millisecond);
-            TileMap map = new TileMap(56, 10);
-            for (int i = 0 ; i < 56; i++){
+            TileMap map = new TileMap(10, 10);
+            for (int i = 0 ; i < 10; i++){
                 for (int j = 0; j < 10; j++)
                 {
                     map.SetTile(i, j, new Tile(rand.Next(1, cat.TilePositions.Count)));
@@ -161,9 +161,11 @@ namespace GameEngine
                 else if (layer.Position.X < 0 && ((layer.Position.X + layer.Size.X) > this.graphics.PreferredBackBufferWidth))
                 {
                     xmin = -(int)layer.Position.X / layer.TileCatalog.Size.X + 1;
-                    xmax = this.graphics.PreferredBackBufferWidth / layer.TileCatalog.Size.X;
+                    xmax = this.graphics.PreferredBackBufferWidth / layer.TileCatalog.Size.X + xmin;
                 }
 
+                xmin = (int)MathHelper.Clamp(xmin, 0, width);
+                xmax = (int)MathHelper.Clamp(xmax, 0, width);
 
                 System.Diagnostics.Debug.WriteLine("xmin: " + xmin + " xmax: " + xmax);
                 TileCatalog catalog = layer.TileCatalog;
