@@ -9,6 +9,12 @@ namespace GameEngine.TileEngine
     public class TileMap
     {
         private Tile[][] map;
+
+        internal Tile[][] Map
+        {
+            get { return map; }
+            set { map = value; }
+        }
         public TileMap(int width, int height)
         {
             this.map = new Tile[width][];
@@ -38,12 +44,6 @@ namespace GameEngine.TileEngine
             return this.map[xPosition][yPosition];
         }
 
-        public Point GetLenght()
-        {
-            int width = this.map.GetLength(0);
-            int height = this.map[0].Length;
-            return new Point(width, height);
-        }
-
+        
     }
 }

@@ -41,13 +41,13 @@ namespace GameEngine
         {
             // TODO: Add your initialization logic here
             texture = this.Content.Load<Texture2D>("tex");
-
+            this.graphics.IsFullScreen = true;
 
 
             TileCatalog cat = new TileCatalog(texture, 15, 15);
             Random rand = new Random(DateTime.Now.Millisecond);
-            TileMap map = new TileMap(10, 10);
-            for (int i = 0 ; i < 10; i++){
+            TileMap map = new TileMap(56, 10);
+            for (int i = 0 ; i < 56; i++){
                 for (int j = 0; j < 10; j++)
                 {
                     map.SetTile(i, j, new Tile(rand.Next(1, cat.TilePositions.Count)));
@@ -129,10 +129,43 @@ namespace GameEngine
 
             foreach (TileLayer layer in scene.Layers)
             {
-                Point size = layer.TileMap.GetLenght();
-                int width = size.X;
-                int height = size.Y;
+                Point lenght = layer.Lenght;
+                int width = lenght.X;
+                int height = lenght.Y;
                 TileMap map = layer.TileMap;
+
+                int xmin = 0;
+                
+                //if (xmin <= 0) { 
+                //    xmin *= -1; xmin++; 
+                //}
+                //else { xmin = 0; }
+
+                //int xmax = (int)layer.Position.X + ((int)layer.Position.X < 0 ? layer.Size.X : layer.Size.X * -1);
+                int xmax = 0;
+                if (layer.Position.X < 0 && ((layer.Position.X + layer.Size.X) > 0 && (layer.Position.X + layer.Size.X) <= this.graphics.PreferredBackBufferWidth))
+                {
+                    xmin = -(int)layer.Position.X / layer.TileCatalog.Size.X + 1;
+                    xmax = ((int)layer.Position.X + layer.Size.X) / layer.TileCatalog.Size.X + xmin;
+                }
+                else if (layer.Position.X >= 0 && ((layer.Position.X + layer.Size.X) <= this.graphics.PreferredBackBufferWidth))
+                {
+                    xmin = 0;
+                    xmax = width;             
+                }
+                else if (layer.Position.X >= 0 && ((layer.Position.X + layer.Size.X) > this.graphics.PreferredBackBufferWidth))
+                {
+                    xmin = 0;
+                    xmax = (this.graphics.PreferredBackBufferWidth - (int)layer.Position.X)/layer.TileCatalog.Size.X;
+                }
+                else if (layer.Position.X < 0 && ((layer.Position.X + layer.Size.X) > this.graphics.PreferredBackBufferWidth))
+                {
+                    xmin = -(int)layer.Position.X / layer.TileCatalog.Size.X + 1;
+                    xmax = this.graphics.PreferredBackBufferWidth / layer.TileCatalog.Size.X;
+                }
+
+
+                System.Diagnostics.Debug.WriteLine("xmin: " + xmin + " xmax: " + xmax);
                 TileCatalog catalog = layer.TileCatalog;
                 for (int i = 0; i < width; i++)
                 {

@@ -22,5 +22,27 @@ namespace GameEngine.TileEngine
             this.Position = position;
         }
 
+
+        public Point Lenght
+        {
+            get{
+                int width = this.TileMap.Map.GetLength(0);
+                int height = this.TileMap.Map[0].Length;
+                return new Point(width, height);           
+            }
+
+        }
+
+        public Point Size
+        {
+            get{
+                Point lenght = this.Lenght;
+                int width = lenght.X * this.TileCatalog.Size.X;
+                int height = lenght.Y * this.TileCatalog.Size.Y;
+                return new Point(width, height);          
+            }
+
+        }
+
     }
 }
