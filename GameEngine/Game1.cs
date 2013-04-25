@@ -46,14 +46,14 @@ namespace GameEngine
 
             TileCatalog cat = new TileCatalog(texture, 15, 15);
             Random rand = new Random(DateTime.Now.Millisecond);
-            TileMap map = new TileMap(10, 10);
-            for (int i = 0 ; i < 10; i++){
+            TileMap map = new TileMap(60, 10);
+            for (int i = 0 ; i < 60; i++){
                 for (int j = 0; j < 10; j++)
                 {
                     map.SetTile(i, j, new Tile(rand.Next(1, cat.TilePositions.Count)));
                 }
             }
-            TileLayer layer = new TileLayer(cat, map, true, Vector2.Zero);
+            TileLayer layer = new TileLayer(cat, map, true, Vector2.Zero, 1.0f);
 
             scene = new TileScene();
             scene.AddLayer(layer);
@@ -91,11 +91,19 @@ namespace GameEngine
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             if(Keyboard.GetState().IsKeyDown(Keys.A)){
-                zoom += 0.01f;
+                foreach (TileLayer layer in scene.Layers)
+                {
+                    layer.Zoom += 0.01f;
+                }
+
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Z))
             {
-                zoom -= 0.01f;
+                foreach (TileLayer layer in scene.Layers)
+                {
+                    layer.Zoom -= 0.01f;
+                }
+                
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
@@ -136,34 +144,51 @@ namespace GameEngine
 
                 int xmin = 0;
                 
-                //if (xmin <= 0) { 
-                //    xmin *= -1; xmin++; 
-                //}
-                //else { xmin = 0; }
 
-                //int xmax = (int)layer.Position.X + ((int)layer.Position.X < 0 ? layer.Size.X : layer.Size.X * -1);
+                //int xmax = 0;
+                //if (layer.Position.X < 0 && ((layer.Position.X + layer.Size.X) > 0 && (layer.Position.X + layer.Size.X) <= this.graphics.PreferredBackBufferWidth))
+                //{
+                //    xmin = -(int)layer.Position.X / layer.TileCatalog.Size.X + 1;
+                //    xmax = ((int)layer.Position.X + layer.Size.X) / layer.TileCatalog.Size.X + xmin;
+                //}
+                //else if (layer.Position.X >= 0 && ((layer.Position.X + layer.Size.X) <= this.graphics.PreferredBackBufferWidth))
+                //{
+                //    xmin = 0;
+                //    xmax = width;             
+                //}
+                //else if (layer.Position.X >= 0 && ((layer.Position.X + layer.Size.X) > this.graphics.PreferredBackBufferWidth))
+                //{
+                //    xmin = 0;
+                //    xmax = (this.graphics.PreferredBackBufferWidth - (int)layer.Position.X)/layer.TileCatalog.Size.X;
+                //}
+                //else if (layer.Position.X < 0 && ((layer.Position.X + layer.Size.X) > this.graphics.PreferredBackBufferWidth))
+                //{
+                //    xmin = -(int)layer.Position.X / layer.TileCatalog.Size.X + 1;
+                //    xmax = this.graphics.PreferredBackBufferWidth / layer.TileCatalog.Size.X + xmin;
+                //}
+
+
                 int xmax = 0;
-                if (layer.Position.X < 0 && ((layer.Position.X + layer.Size.X) > 0 && (layer.Position.X + layer.Size.X) <= this.graphics.PreferredBackBufferWidth))
+                if (layer.Position.X < 0 && ((layer.Position.X + layer.ZoomedSize.X) > 0 && (layer.Position.X + layer.ZoomedSize.X) <= this.graphics.PreferredBackBufferWidth))
                 {
-                    xmin = -(int)layer.Position.X / layer.TileCatalog.Size.X + 1;
-                    xmax = ((int)layer.Position.X + layer.Size.X) / layer.TileCatalog.Size.X + xmin;
+                    xmin = (int)(-layer.Position.X / layer.ZoomedTileSize.X ) + 1;
+                    xmax = (int)((layer.Position.X + layer.ZoomedSize.X) / (layer.ZoomedTileSize.X)) + xmin;
                 }
-                else if (layer.Position.X >= 0 && ((layer.Position.X + layer.Size.X) <= this.graphics.PreferredBackBufferWidth))
+                else if (layer.Position.X >= 0 && ((layer.Position.X + layer.ZoomedSize.X) <= this.graphics.PreferredBackBufferWidth))
                 {
                     xmin = 0;
                     xmax = width;             
                 }
-                else if (layer.Position.X >= 0 && ((layer.Position.X + layer.Size.X) > this.graphics.PreferredBackBufferWidth))
+                else if (layer.Position.X >= 0 && ((layer.Position.X + layer.ZoomedSize.X) > this.graphics.PreferredBackBufferWidth))
                 {
                     xmin = 0;
-                    xmax = (this.graphics.PreferredBackBufferWidth - (int)layer.Position.X)/layer.TileCatalog.Size.X;
+                    xmax = (int)((this.graphics.PreferredBackBufferWidth - layer.Position.X) / layer.ZoomedTileSize.X);
                 }
-                else if (layer.Position.X < 0 && ((layer.Position.X + layer.Size.X) > this.graphics.PreferredBackBufferWidth))
+                else if (layer.Position.X < 0 && ((layer.Position.X + layer.ZoomedSize.X) > this.graphics.PreferredBackBufferWidth))
                 {
-                    xmin = -(int)layer.Position.X / layer.TileCatalog.Size.X + 1;
-                    xmax = this.graphics.PreferredBackBufferWidth / layer.TileCatalog.Size.X + xmin;
+                    xmin = (int)(-layer.Position.X / layer.ZoomedTileSize.X) + 1;
+                    xmax = (int)(this.graphics.PreferredBackBufferWidth / layer.ZoomedTileSize.X) + xmin;
                 }
-
                 xmin = (int)MathHelper.Clamp(xmin, 0, width);
                 xmax = (int)MathHelper.Clamp(xmax, 0, width);
 
@@ -175,14 +200,14 @@ namespace GameEngine
                     {
 
                         Rectangle source = catalog.TilePositions[map.GetTile(i, j).Index];
-                        Vector2 absolutePosition = Vector2.Multiply(new Vector2(i, j), new Vector2(source.Width * zoom, source.Height * zoom));
+                        Vector2 absolutePosition = Vector2.Multiply(new Vector2(i, j), new Vector2(source.Width * layer.Zoom, source.Height * layer.Zoom));
                         Vector2 relativePosition = Vector2.Add(layer.Position,absolutePosition); 
  
                         spriteBatch.Draw(catalog.Texture,
                                          relativePosition,
                                          source,
                                          Color.AliceBlue,
-                                         0, Vector2.Zero, zoom, SpriteEffects.None, 0.0f);
+                                         0, Vector2.Zero, layer.Zoom, SpriteEffects.None, 0.0f);
                     }
                 }
             }
