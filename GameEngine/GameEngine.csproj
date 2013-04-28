@@ -41,6 +41,7 @@
     <Compile Include="TileEngine\Tile.cs" />
     <Compile Include="TileEngine\TileCatalog.cs" />
     <Compile Include="TileEngine\TileCatalogException.cs" />
+    <Compile Include="TileEngine\TileDrawLimits.cs" />
     <Compile Include="TileEngine\TileLayer.cs" />
     <Compile Include="TileEngine\TileMap.cs" />
     <Compile Include="TileEngine\TileScene.cs" />

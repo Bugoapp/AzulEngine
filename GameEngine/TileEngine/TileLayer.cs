@@ -12,15 +12,16 @@ namespace GameEngine.TileEngine
         public TileMap TileMap { get; set; }
         public Boolean Visible {get; set;}
         public Vector2 Position {get; set;}
-        public float Zoom { get; set; }
-
-        public TileLayer(TileCatalog tileCatalog, TileMap tileMap, Boolean visible, Vector2 position, float zoom)
+        public Vector2 Zoom { get; set; }
+        public Vector2 ZoomScale { get; set; }
+        public TileLayer(TileCatalog tileCatalog, TileMap tileMap, Boolean visible, Vector2 position, Vector2 zoom, Vector2 zoomScale)
         {
             this.TileCatalog = tileCatalog;
             this.TileMap = tileMap;
             this.Visible = visible;
             this.Position = position;
             this.Zoom = zoom;
+            this.ZoomScale = zoomScale;
         }
 
 
@@ -49,8 +50,8 @@ namespace GameEngine.TileEngine
         {
             get
             {
-                float width = this.TileCatalog.Size.X * this.Zoom;
-                float height = this.TileCatalog.Size.Y * this.Zoom;
+                float width = this.TileCatalog.Size.X * this.Zoom.X * this.ZoomScale.X;
+                float height = this.TileCatalog.Size.Y * this.Zoom.Y * this.ZoomScale.Y;
                 return new Vector2(width, height);
             }
         }
