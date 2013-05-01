@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace GameEngine.TileEngine
@@ -14,16 +12,29 @@ namespace GameEngine.TileEngine
         public Vector2 Position {get; set;}
         public Vector2 Zoom { get; set; }
         public Vector2 ZoomScale { get; set; }
-        public TileLayer(TileCatalog tileCatalog, TileMap tileMap, Boolean visible, Vector2 position, Vector2 zoom, Vector2 zoomScale)
+        public Vector2 Velocity { get; set; }
+
+        private Vector2 origin;
+
+        public Vector2 Origin
+        {
+            get { return origin; }
+        }
+
+        public TileLayer(TileCatalog tileCatalog, TileMap tileMap, Boolean visible, Vector2 position, Vector2 zoom, Vector2 zoomScale, Vector2 velocity)
         {
             this.TileCatalog = tileCatalog;
             this.TileMap = tileMap;
             this.Visible = visible;
-            this.Position = position;
+            this.Position = this.origin = position;
             this.Zoom = zoom;
             this.ZoomScale = zoomScale;
+            this.Velocity = velocity;
         }
 
+        public TileLayer(TileCatalog tileCatalog, TileMap tileMap)
+            : this(tileCatalog, tileMap, true, Vector2.Zero, Vector2.One, Vector2.One, Vector2.One)
+        { }
 
         public Point Lenght
         {
@@ -32,7 +43,6 @@ namespace GameEngine.TileEngine
                 int height = this.TileMap.Map[0].Length;
                 return new Point(width, height);           
             }
-
         }
 
         public Point Size
@@ -75,5 +85,7 @@ namespace GameEngine.TileEngine
                 return this.TileCatalog.Size;
             }
         }
+
+
     }
 }

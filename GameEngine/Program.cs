@@ -19,6 +19,10 @@ namespace GameEngine
         [STAThread]
         static void Main()
         {
+#if DEBUG
+            // Add this; Change the Locales(En-US): Done.
+            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+#endif
             game = new Game1();
             game.Run();
         }

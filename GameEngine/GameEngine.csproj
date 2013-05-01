@@ -35,16 +35,19 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CameraEngine\Camera2D.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TileEngine\Tile.cs" />
     <Compile Include="TileEngine\TileCatalog.cs" />
     <Compile Include="TileEngine\TileCatalogException.cs" />
+    <Compile Include="TileEngine\TileComponent.cs" />
     <Compile Include="TileEngine\TileDrawLimits.cs" />
     <Compile Include="TileEngine\TileLayer.cs" />
     <Compile Include="TileEngine\TileMap.cs" />
     <Compile Include="TileEngine\TileScene.cs" />
+    <Compile Include="Utils\Resolution.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
