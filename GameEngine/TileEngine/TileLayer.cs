@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
+//introducir zoom en la camara y no en la capa
+//introducir bandera que indique usar camara o use movimiento independiente
+
 namespace GameEngine.TileEngine
 {
     public class TileLayer
@@ -13,7 +16,16 @@ namespace GameEngine.TileEngine
         public Vector2 Zoom { get; set; }
         public Vector2 ZoomScale { get; set; }
         public Vector2 Velocity { get; set; }
+        public float transparency;
+        public float Transparency
+        {
+            get { return this.transparency; }
 
+            set
+            {
+                transparency = MathHelper.Clamp(value, 0, 1f);
+            }
+        }
         private Vector2 origin;
 
         public Vector2 Origin
@@ -21,10 +33,11 @@ namespace GameEngine.TileEngine
             get { return origin; }
         }
 
-        public TileLayer(TileCatalog tileCatalog, TileMap tileMap, Boolean visible, Vector2 position, Vector2 zoom, Vector2 zoomScale, Vector2 velocity)
+        public TileLayer(TileCatalog tileCatalog, TileMap tileMap,float transparency, Boolean visible, Vector2 position, Vector2 zoom, Vector2 zoomScale, Vector2 velocity)
         {
             this.TileCatalog = tileCatalog;
             this.TileMap = tileMap;
+            this.transparency = transparency;
             this.Visible = visible;
             this.Position = this.origin = position;
             this.Zoom = zoom;
@@ -33,7 +46,7 @@ namespace GameEngine.TileEngine
         }
 
         public TileLayer(TileCatalog tileCatalog, TileMap tileMap)
-            : this(tileCatalog, tileMap, true, Vector2.Zero, Vector2.One, Vector2.One, Vector2.One)
+            : this(tileCatalog, tileMap,1.0f, true, Vector2.Zero, Vector2.One, Vector2.One, Vector2.One)
         { }
 
         public Point Lenght

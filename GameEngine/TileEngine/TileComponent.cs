@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameEngine.CameraEngine;
 
 namespace GameEngine.TileEngine
 {
@@ -30,10 +31,29 @@ namespace GameEngine.TileEngine
             this.ResultionIndependent = resultionIndependent;
         }
 
+        public override void Initialize()
+        {
+            Camera2D camera = this.Game.Services.GetService(typeof(Camera2D)) as Camera2D;
+            foreach (TileLayer layer in tileScene.Layers)
+            {
+                TileLayer currentLayer = layer;
+                this.CorrectCamera(ref camera, ref currentLayer);
+                
+            }
+        }
 
         public override void Update(GameTime gameTime)
         {
-
+            Camera2D camera = this.Game.Services.GetService(typeof(Camera2D)) as Camera2D;
+            if (camera.Changed)
+            {
+                foreach (TileLayer layer in tileScene.Layers)
+                {
+                    TileLayer currentLayer = layer;
+                    this.CorrectCamera(ref camera, ref currentLayer);
+                }
+                camera.Changed = false;
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -41,19 +61,24 @@ namespace GameEngine.TileEngine
 
             SpriteBatch spriteBatch = Game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
             Vector3 screenScalingFactor;
+            Rectangle clientBounds;
             if (this.ResultionIndependent)
             {
                 float horScaling = (float)this.GraphicsDevice.PresentationParameters.BackBufferWidth / baseScreenSize.X;
                 float verScaling = (float)this.GraphicsDevice.PresentationParameters.BackBufferHeight / baseScreenSize.Y;
                 screenScalingFactor = new Vector3(horScaling, verScaling, 1);
+                clientBounds = new Rectangle(0, 0, (int)this.baseScreenSize.X, (int)this.baseScreenSize.Y);
             }
             else
             {
                 screenScalingFactor = new Vector3(1, 1, 1);
+                clientBounds = new Rectangle(0, 0, (int)this.GraphicsDevice.Viewport.Width, (int)this.GraphicsDevice.Viewport.Height);
+
             }
             Matrix globalTransformation = Matrix.CreateScale(screenScalingFactor);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque, null, null, null, null, globalTransformation);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, globalTransformation);
+
             foreach (TileLayer tileLayer in tileScene.Layers)
             {
                 if (tileLayer.Visible)
@@ -62,7 +87,10 @@ namespace GameEngine.TileEngine
                     int layerWidth = layerLenght.X;
                     int layerHeight = layerLenght.Y;
                     TileMap tileMap = tileLayer.TileMap;
-                    TileDrawLimits drawLimits = this.GetDrawLimits(tileLayer, new Rectangle(0, 0, (int)baseScreenSize.X, (int)baseScreenSize.Y));
+
+
+                    TileDrawLimits drawLimits = this.GetDrawLimits(tileLayer, clientBounds);
+
                     TileCatalog tileCatalog = tileLayer.TileCatalog;
                     for (int i = drawLimits.XMin; i < drawLimits.XMax; i++)
                     {
@@ -79,7 +107,7 @@ namespace GameEngine.TileEngine
                             spriteBatch.Draw(tileCatalog.Texture,
                                              tileRelativePosition,
                                              sourceTile,
-                                             Color.AliceBlue,
+                                             Color.White * tileLayer.transparency,
                                              0, Vector2.Zero,
                                              Vector2.Multiply(tileLayer.Zoom, tileLayer.ZoomScale),
                                              SpriteEffects.None,
@@ -88,8 +116,8 @@ namespace GameEngine.TileEngine
                     }
 
                 }
-
             }
+            spriteBatch.End();
             base.Draw(gameTime);
         }
 
@@ -129,6 +157,15 @@ namespace GameEngine.TileEngine
             max = (int)MathHelper.Clamp(max, 0, lenght);
 
             return new int[] { min, max };
+        }
+
+        public void CorrectCamera(ref Camera2D camera, ref TileLayer layer)
+        {
+            Vector2 displacementRatio = Vector2.Divide(layer.Velocity, camera.Velocity);
+            Vector2 realDisplacement = Vector2.Multiply(camera.Position, displacementRatio);
+            Vector2 realPosition = Vector2.Subtract(layer.Origin, realDisplacement);
+
+            layer.Position = realPosition;
         }
 
     }
