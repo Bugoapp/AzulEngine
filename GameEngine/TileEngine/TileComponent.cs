@@ -8,6 +8,7 @@ namespace GameEngine.TileEngine
 {
     public class TileComponent: DrawableGameComponent
     {
+        private Camera2D camera;
         private TileScene tileScene;
         public TileScene TileScene
         {
@@ -33,7 +34,7 @@ namespace GameEngine.TileEngine
 
         public override void Initialize()
         {
-            Camera2D camera = this.Game.Services.GetService(typeof(Camera2D)) as Camera2D;
+            camera = this.Game.Services.GetService(typeof(Camera2D)) as Camera2D;
             foreach (TileLayer layer in tileScene.Layers)
             {
                 TileLayer currentLayer = layer;
@@ -45,15 +46,32 @@ namespace GameEngine.TileEngine
         public override void Update(GameTime gameTime)
         {
             Camera2D camera = this.Game.Services.GetService(typeof(Camera2D)) as Camera2D;
-            if (camera.Changed)
+            foreach (TileLayer layer in tileScene.Layers)
             {
-                foreach (TileLayer layer in tileScene.Layers)
+                if (!layer.CameraIndependent)
                 {
-                    TileLayer currentLayer = layer;
-                    this.CorrectCamera(ref camera, ref currentLayer);
+                    if (camera.Changed)
+                    {
+                        TileLayer currentLayer = layer;
+                        this.CorrectCamera(ref camera, ref currentLayer);
+                    }
                 }
-                camera.Changed = false;
+                else{
+                        TileLayer currentLayer = layer;
+                        this.MoveLayer(ref currentLayer);           
+                }
             }
+
+
+
+            //if (camera.Changed)
+            //{
+            //    foreach (TileLayer layer in tileScene.Layers)
+            //    {
+
+            //    }
+            //    camera.Changed = false;
+            //}
         }
 
         public override void Draw(GameTime gameTime)
@@ -92,15 +110,15 @@ namespace GameEngine.TileEngine
                     TileDrawLimits drawLimits = this.GetDrawLimits(tileLayer, clientBounds);
 
                     TileCatalog tileCatalog = tileLayer.TileCatalog;
-                    for (int i = drawLimits.XMin; i < drawLimits.XMax; i++)
+                    for (int j = drawLimits.YMin; j < drawLimits.YMax; j++)
                     {
-                        for (int j = drawLimits.YMin; j < drawLimits.YMax; j++)
+                        for (int i = drawLimits.XMin; i < drawLimits.XMax; i++)
                         {
 
                             Rectangle sourceTile = tileCatalog.TilePositions[tileMap.GetTile(i, j).Index];
                             //calcular la posicion de cada tile donde corresponde, multiplicando el numero de turno por su tamaño
                             //pe. x = 5 * 10 = 50
-                            Vector2 tileAbsolutePosition = Vector2.Multiply(new Vector2(i, j), tileLayer.ZoomedTileSize);
+                            Vector2 tileAbsolutePosition = Vector2.Multiply( Vector2.Multiply(new Vector2(i, j), tileLayer.ScaledTileSize),camera.Zoom) ;
                             //calcular la posicion con respecto a la posicion de la capa
                             Vector2 tileRelativePosition = Vector2.Add(tileLayer.Position, tileAbsolutePosition);
 
@@ -109,7 +127,7 @@ namespace GameEngine.TileEngine
                                              sourceTile,
                                              Color.White * tileLayer.transparency,
                                              0, Vector2.Zero,
-                                             Vector2.Multiply(tileLayer.Zoom, tileLayer.ZoomScale),
+                                             Vector2.Multiply(camera.Zoom, tileLayer.ZoomScale),
                                              SpriteEffects.None,
                                              0.0f);
                         }
@@ -123,35 +141,35 @@ namespace GameEngine.TileEngine
 
         public TileDrawLimits GetDrawLimits(TileLayer layer, Rectangle clientBounds)
         {
-            int[] xLimit = this.GetAxisLimit(layer.Position.X, layer.ZoomedSize.X, layer.ZoomedTileSize.X, layer.Lenght.X, clientBounds.Width);
-            int[] yLimit = this.GetAxisLimit(layer.Position.Y, layer.ZoomedSize.Y, layer.ZoomedTileSize.Y, layer.Lenght.Y, clientBounds.Height);
+            int[] xLimit = this.GetAxisLimit(layer.Position.X, layer.ScaledSize.X * camera.Zoom.X, layer.ScaledTileSize.X * camera.Zoom.X, layer.Lenght.X, clientBounds.Width);
+            int[] yLimit = this.GetAxisLimit(layer.Position.Y, layer.ScaledSize.Y * camera.Zoom.Y, layer.ScaledTileSize.Y * camera.Zoom.Y, layer.Lenght.Y, clientBounds.Height);
             TileDrawLimits tileDrawLimits = new TileDrawLimits(xLimit[0], xLimit[1], yLimit[0], yLimit[1]);
             return tileDrawLimits;
         }
 
-        public int[] GetAxisLimit(float position, float zoomedSize, float zoomedTileSize, int lenght, int bound)
+        public int[] GetAxisLimit(float position, float zoomedScaledSize, float zoomedScaledTileSize, int lenght, int bound)
         {
             int min = 0;
             int max = 0;
-            if (position < 0 && ((position + zoomedSize) > 0 && (position + zoomedSize) <= bound))
+            if (position < 0 && ((position + zoomedScaledSize) > 0 && (position + zoomedScaledSize) <= bound))
             {
-                min = (int)(-position / zoomedTileSize);
-                max = (int)((position + zoomedSize) / (zoomedTileSize)) + min + 2;
+                min = (int)(-position / zoomedScaledTileSize);
+                max = (int)((position + zoomedScaledSize) / (zoomedScaledTileSize)) + min + 2;
             }
-            else if (position >= 0 && ((position + zoomedSize) <= bound))
+            else if (position >= 0 && ((position + zoomedScaledSize) <= bound))
             {
                 min = 0;
                 max = lenght;
             }
-            else if (position >= 0 && ((position + zoomedSize) > bound))
+            else if (position >= 0 && ((position + zoomedScaledSize) > bound))
             {
                 min = 0;
-                max = (int)((bound - position) / zoomedTileSize) + 2;
+                max = (int)((bound - position) / zoomedScaledTileSize) + 2;
             }
-            else if (position < 0 && ((position + zoomedSize) > bound))
+            else if (position < 0 && ((position + zoomedScaledSize) > bound))
             {
-                min = (int)(-position / zoomedTileSize);
-                max = (int)(bound / zoomedTileSize) + min + 2;
+                min = (int)(-position / zoomedScaledTileSize);
+                max = (int)(bound / zoomedScaledTileSize) + min + 2;
             }
             min = (int)MathHelper.Clamp(min, 0, lenght);
             max = (int)MathHelper.Clamp(max, 0, lenght);
@@ -164,8 +182,38 @@ namespace GameEngine.TileEngine
             Vector2 displacementRatio = Vector2.Divide(layer.Velocity, camera.Velocity);
             Vector2 realDisplacement = Vector2.Multiply(camera.Position, displacementRatio);
             Vector2 realPosition = Vector2.Subtract(layer.Origin, realDisplacement);
-
             layer.Position = realPosition;
+        }
+
+        public void MoveLayer(ref TileLayer layer)
+        {
+            switch (layer.Direction)
+            {
+                case TileLayerMovementDirection.Up:
+                    layer.Position = Vector2.Add(layer.Position, new Vector2(0, -layer.Velocity.Y));
+                    break;
+                case TileLayerMovementDirection.Down:
+                    layer.Position = Vector2.Add(layer.Position, new Vector2(0, layer.Velocity.Y));
+                    break;
+                case TileLayerMovementDirection.Left:
+                    layer.Position = Vector2.Add(layer.Position, new Vector2(-layer.Velocity.X, 0));
+                    break;
+                case TileLayerMovementDirection.Right:
+                    layer.Position = Vector2.Add(layer.Position, new Vector2(layer.Velocity.X, 0));
+                    break;
+                case TileLayerMovementDirection.LowerLeft:
+                    layer.Position = Vector2.Add(layer.Position, new Vector2(-layer.Velocity.X, layer.Velocity.Y));
+                    break;
+                case TileLayerMovementDirection.LowerRigth:
+                    layer.Position = Vector2.Add(layer.Position, new Vector2(layer.Velocity.X, layer.Velocity.Y));
+                    break;
+                case TileLayerMovementDirection.UpperLeft:
+                    layer.Position = Vector2.Add(layer.Position, new Vector2(-layer.Velocity.X, -layer.Velocity.Y));
+                    break;
+                case TileLayerMovementDirection.UpperRight:
+                    layer.Position = Vector2.Add(layer.Position, new Vector2(layer.Velocity.X, -layer.Velocity.Y));
+                    break;
+            }
         }
 
     }

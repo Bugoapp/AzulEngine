@@ -45,6 +45,7 @@
     <Compile Include="TileEngine\TileComponent.cs" />
     <Compile Include="TileEngine\TileDrawLimits.cs" />
     <Compile Include="TileEngine\TileLayer.cs" />
+    <Compile Include="TileEngine\TileLayerMovementDirection.cs" />
     <Compile Include="TileEngine\TileMap.cs" />
     <Compile Include="TileEngine\TileScene.cs" />
     <Compile Include="Utils\Resolution.cs" />

@@ -31,12 +31,14 @@ namespace GameEngine
         public Game1()
             : base()
         {
-       
+            int resolutionCount = OpenTK.DisplayDevice.GetDisplay(OpenTK.DisplayIndex.Default).AvailableResolutions.Count;
+            OpenTK.DisplayResolution dv = OpenTK.DisplayDevice.GetDisplay(OpenTK.DisplayIndex.Default).AvailableResolutions[resolutionCount -1 ] ;
+            
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            baseScreenSize = new Vector2(1280, 1024);
-            graphics.PreferredBackBufferWidth = 320;
-            graphics.PreferredBackBufferHeight = 280;
+            baseScreenSize = new Vector2(dv.Width, dv.Height);
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
             graphics.IsFullScreen = false;
             this.Window.AllowUserResizing = true;
             graphics.ApplyChanges();           
@@ -62,7 +64,7 @@ namespace GameEngine
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            camera = new Camera2D(new Vector2(0f, 0f), new Vector2(1f));
+            camera = new Camera2D(new Vector2(0f, 0f), new Vector2(1f), new Vector2(1f));
 
             this.Services.AddService(typeof(SpriteBatch), spriteBatch);
             this.Services.AddService(typeof(Camera2D), camera);
@@ -70,29 +72,29 @@ namespace GameEngine
             texture = this.Content.Load<Texture2D>("tex");
             TileCatalog cat1 = new TileCatalog(texture, 15, 15);
             Random rand = new Random(DateTime.Now.Millisecond);
-            TileMap map1 = new TileMap(1000, 1000);
-            for (int i = 0; i < 1000; i++)
+            TileMap map1 = new TileMap(100, 5000);
+            for (int i = 0; i < 100; i++)
             {
-                for (int j = 0; j < 1000; j++)
+                for (int j = 0; j < 5000; j++)
                 {
                     map1.SetTile(i, j, new Tile(rand.Next(1, cat1.TilePositions.Count)));
                 }
             }
 
-            TileLayer layer1 = new TileLayer(cat1, map1, 0.5f, true, new Vector2(100, 100), new Vector2(1.0f, 1.0f), Vector2.One, new Vector2(3f));
+            TileLayer layer1 = new TileLayer(cat1, map1, 0.5f, true, new Vector2(0, 0), new Vector2(2.5f, 2.5f), new Vector2(3f), false, TileLayerMovementDirection.None);
 
             texture = this.Content.Load<Texture2D>("tiles2");
 
             TileCatalog cat2 = new TileCatalog(texture, 48, 48);
-            TileMap map2 = new TileMap(200, 200);
-            for (int i = 0; i < 200; i++)
+            TileMap map2 = new TileMap(100, 100);
+            for (int i = 0; i < 100; i++)
             {
-                for (int j = 0; j < 200; j++)
+                for (int j = 0; j < 100; j++)
                 {
                     map2.SetTile(i, j, new Tile(rand.Next(1, cat2.TilePositions.Count)));
                 }
             }
-            TileLayer layer2 = new TileLayer(cat2, map2, 1.0f, true, new Vector2(0, 0), new Vector2(1.0f, 1.0f), new Vector2(0.1f, 0.1f), new Vector2(1f));
+            TileLayer layer2 = new TileLayer(cat2, map2, 1.0f, true, new Vector2(0, 0), new Vector2(1f, 1f), new Vector2(3f), true, TileLayerMovementDirection.Up);
 
             scene = new TileScene();
             scene.AddLayer(layer2);
@@ -130,19 +132,17 @@ namespace GameEngine
 
 
             if(Keyboard.GetState().IsKeyDown(Keys.A)){
-                foreach (TileLayer layer in scene.Layers)
-                {
-                    layer.Zoom = Vector2.Add(layer.Zoom, new Vector2(0.01f, 0.01f));
-                }
+
+                camera.Zoom = Vector2.Add(camera.Zoom, new Vector2(0.01f, 0.01f));
+                
             }
 
 
             if (Keyboard.GetState().IsKeyDown(Keys.Z))
             {
-                foreach (TileLayer layer in scene.Layers)
-                {
-                    layer.Zoom = Vector2.Subtract(layer.Zoom, new Vector2(0.01f, 0.01f));
-                }
+
+                camera.Zoom = Vector2.Subtract(camera.Zoom, new Vector2(0.01f, 0.01f));
+                
                 
             }
 

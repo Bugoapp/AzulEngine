@@ -1,0 +1,14 @@
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Content\tex.xnb
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Content\tiles2.xnb
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Content\tyrian.xnb
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\GameEngine.exe
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\GameEngine.pdb
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Lidgren.Network.dll
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\MonoGame.Framework.Windows.dll
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\OpenTK.dll
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Tao.Sdl.dll
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Lidgren.Network.Windows.dll
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Lidgren.Network.xml
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Lidgren.Network.Windows.xml
+D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Release\GameEngine.exe
+D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Release\GameEngine.pdb
