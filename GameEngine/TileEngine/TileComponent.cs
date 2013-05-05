@@ -61,17 +61,6 @@ namespace GameEngine.TileEngine
                         this.MoveLayer(ref currentLayer);           
                 }
             }
-
-
-
-            //if (camera.Changed)
-            //{
-            //    foreach (TileLayer layer in tileScene.Layers)
-            //    {
-
-            //    }
-            //    camera.Changed = false;
-            //}
         }
 
         public override void Draw(GameTime gameTime)

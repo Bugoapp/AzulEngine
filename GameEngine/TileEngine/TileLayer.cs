@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-
-//introducir bandera que indique usar camara o use movimiento independiente
-
 namespace GameEngine.TileEngine
 {
     public class TileLayer
