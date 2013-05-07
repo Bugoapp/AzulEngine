@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameEngine</name>
+    </assembly>
+    <members>
+        <member name="T:GameEngine.Program">
+            <summary>
+            The main class.
+            </summary>
+        </member>
+        <member name="M:GameEngine.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:GameEngine.Game1">
+            <summary>
+            This is the main type for your game
+            </summary>
+        </member>
+        <member name="M:GameEngine.Game1.Initialize">
+            <summary>
+            Allows the game to perform any initialization it needs to before starting to run.
+            This is where it can query for any required services and load any non-graphic
+            related content.  Calling base.Initialize will enumerate through any components
+            and initialize them as well.
+            </summary>
+        </member>
+        <member name="M:GameEngine.Game1.LoadContent">
+            <summary>
+            LoadContent will be called once per game and is the place to load
+            all of your content.
+            </summary>
+        </member>
+        <member name="M:GameEngine.Game1.UnloadContent">
+            <summary>
+            UnloadContent will be called once per game and is the place to unload
+            all content.
+            </summary>
+        </member>
+        <member name="M:GameEngine.Game1.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Allows the game to run logic such as updating the world,
+            checking for collisions, gathering input, and playing audio.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:GameEngine.Game1.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            This is called when the game should draw itself.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="T:GameEngine.TileEngine.TileCatalogException">
+            <summary>
+            Representa un error cuando se cargan texturas que tiene un tamaño que no coincide
+            con los tamaños de baldosa especificados
+            </summary>
+        </member>
+        <member name="M:GameEngine.TileEngine.TileCatalogException.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase GameEngine.TileEngine.TileCatalogException
+            </summary>
+        </member>
+        <member name="T:GameEngine.TileEngine.TileCatalog">
+            <summary>
+            Representa una catálogo de baldosas 
+            </summary>
+        </member>
+        <member name="M:GameEngine.TileEngine.TileCatalog.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase GameEngine.TileEngine.TileCatalogException que recibe como
+            parametros la textura, el ancho y alto de la baldosa.
+            </summary>
+            <param name="texture">Textura que define el catálogo</param>
+            <param name="width">Ancho de una baldosa</param>
+            <param name="height">Alto de una baldosa</param>
+        </member>
+        <member name="M:GameEngine.TileEngine.TileCatalog.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Collections.Generic.Dictionary{System.Int32,Microsoft.Xna.Framework.Rectangle},System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase GameEngine.TileEngine.TileCatalogException que recibe como
+            parametros la textura, una colección de rectángulos,el ancho y alto de la baldosa.
+            </summary>
+            <param name="texture">Textura que define el catálogo</param>
+            <param name="width">Ancho de una baldosa</param>
+            <param name="height">Alto de una baldosa</param>
+        </member>
+        <member name="M:GameEngine.TileEngine.TileCatalog.GetTilePosition(GameEngine.TileEngine.Tile@,Microsoft.Xna.Framework.Rectangle@)">
+            <summary>
+            Obtiene el rectángulo de la posicion de una baldosa dentro de la textura 
+            dada una referencia de la misma
+            </summary>
+            <param name="tile">Referencia de la baldosa de la que se obtendra la posición </param>
+            <param name="tilePosition">Valor de salida que contiene el rectángulo de posición</param>
+        </member>
+        <member name="M:GameEngine.TileEngine.TileCatalog.AddTilePosition(System.Int32,Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Agrega o modifica una nuevo índice a la colección de rectángulos de posición de baldosas
+            </summary>
+            <param name="index">Indice de la baldosa</param>
+            <param name="tilePosition">Rectángulo que representa la posición de la baldosa</param>
+        </member>
+        <member name="M:GameEngine.TileEngine.TileCatalog.CalculateTilePositions(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.Int32,Microsoft.Xna.Framework.Rectangle}@)">
+            <summary>
+            Calcula las posiciones de las baldosas y las agrega dentro de la colecciones de rectángulos de posición, 
+            evitando crear la colección de manera manual.
+            </summary>
+            <param name="texture">Textura de la que se calculan los rectángulos de posición</param>
+            <param name="width">Ancho de la baldosa</param>
+            <param name="height">Alto de la baldosa</param>
+            <param name="tilePositions">referencia de la colección de rectangulos de posición a devolver</param>
+        </member>
+        <member name="P:GameEngine.TileEngine.TileCatalog.Size">
+            <summary>
+            Obtiene o establece el tamaño de una baldosa individual
+            </summary>
+        </member>
+        <member name="P:GameEngine.TileEngine.TileCatalog.TilePositions">
+            <summary>
+            Obtiene una colección de los rectángulos que prepresentan la posición de cada baldosa del catálogo
+            </summary>
+        </member>
+        <member name="P:GameEngine.TileEngine.TileCatalog.Texture">
+            <summary>
+            Obtiene la textura que se utiliza para generar el catálogo
+            </summary>
+        </member>
+        <member name="T:GameEngine.TileEngine.Tile">
+            <summary>
+            Representa una baldosa de una capa de baldosas
+            </summary>
+        </member>
+        <member name="M:GameEngine.TileEngine.Tile.#ctor(System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase GameEngine.TileEngine.Tile 
+            con el patrón especificado que indica el índice de la baldosa.
+            </summary>
+            <param name="tipo">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="P:GameEngine.TileEngine.Tile.Index">
+            <summary>
+            Obtiene o establece el índice de la baldosa dentro de la categoría de baldosas.
+            </summary>
+        </member>
+    </members>
+</doc>

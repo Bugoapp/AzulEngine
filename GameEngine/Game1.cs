@@ -71,6 +71,7 @@ namespace GameEngine
 
             texture = this.Content.Load<Texture2D>("tex");
             TileCatalog cat1 = new TileCatalog(texture, 15, 15);
+  
             Random rand = new Random(DateTime.Now.Millisecond);
             TileMap map1 = new TileMap(100, 5000);
             for (int i = 0; i < 100; i++)
