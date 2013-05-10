@@ -1,4 +1,20 @@
-﻿using System;
+﻿//<Game engine for monogame>
+//Copyright (C) <2013>
+
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -43,7 +59,7 @@ namespace AzulEngine.TileEngine
 
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase GameEngine.TileEngine.TileComponent que recibe como
+        /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileComponent que recibe como
         /// parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.
         /// </summary>
         /// <param name="game">Objeto tipo Game que representa el tipo principal del juego</param>
@@ -159,7 +175,7 @@ namespace AzulEngine.TileEngine
         /// </summary>
         /// <param name="layer">Capa de baldosas que se va a limitar</param>
         /// <param name="clientBounds">Rectángulo que representa los limites que definirán el cálculo</param>
-        /// <returns>Retorna un objeto de tipo GameEngine.TileEngine.TileDrawLimits</returns>
+        /// <returns>Retorna un objeto de tipo AzulEngine.TileEngine.TileDrawLimits</returns>
         public TileDrawLimits GetDrawLimits(TileLayer layer, Rectangle clientBounds)
         {
             int[] xLimit = this.GetAxisLimit(layer.Position.X, layer.ScaledSize.X * camera.Zoom.X, layer.ScaledTileSize.X * camera.Zoom.X, layer.Lenght.X, clientBounds.Width);
