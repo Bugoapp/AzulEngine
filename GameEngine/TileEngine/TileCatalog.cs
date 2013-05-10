@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace GameEngine.TileEngine
+namespace AzulEngine.TileEngine
 {
 
     /// <summary>
@@ -38,6 +38,7 @@ namespace GameEngine.TileEngine
         {
             get { return texture; }
         }
+
         /// <summary>
         /// Inicializa una nueva instancia de la clase GameEngine.TileEngine.TileCatalogException que recibe como
         /// parametros la textura, el ancho y alto de la baldosa.

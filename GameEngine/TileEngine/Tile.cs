@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GameEngine.TileEngine
+namespace AzulEngine.TileEngine
 {
     /// <summary>
     /// Representa una baldosa de una capa de baldosas

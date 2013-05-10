@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GameEngine.TileEngine
+namespace AzulEngine.TileEngine
 {
     /// <summary>
     /// Representa un error cuando se cargan texturas que tiene un tamaño que no coincide

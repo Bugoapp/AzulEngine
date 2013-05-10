@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 #endregion
 
-namespace GameEngine
+namespace AzulEngine
 {
     /// <summary>
     /// The main class.

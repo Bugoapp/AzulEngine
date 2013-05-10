@@ -2,17 +2,46 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace GameEngine.TileEngine
+namespace AzulEngine.TileEngine
 {
+    /// <summary>
+    /// Clase que representa una capa de baldosas
+    /// </summary>
     public class TileLayer
     {
+        /// <summary>
+        /// Obtiene o establece el catálogo de baldosas
+        /// </summary>
         public TileCatalog TileCatalog { get; set; }
+
+        /// <summary>
+        /// Obtiene o establece el mapa de baldosas
+        /// </summary>
         public TileMap TileMap { get; set; }
+
+        /// <summary>
+        /// Obtiene o establece la visibilidad de la capa
+        /// </summary>
         public Boolean Visible {get; set;}
+
+        /// <summary>
+        /// Obtiene o establece la posición de la capa
+        /// </summary>
         public Vector2 Position {get; set;}
+
+        /// <summary>
+        /// Obtiene o establece la escala de la capa
+        /// </summary>
         public Vector2 ZoomScale { get; set; }
+
+        /// <summary>
+        /// Obtiene o establece la velocidad de desplazamiento de la capa
+        /// </summary>
         public Vector2 Velocity { get; set; }
 
+        /// <summary>
+        /// Obtiene o establece la transparencia de la capa
+        /// </summary>
         public float transparency;
         public float Transparency
         {
@@ -24,25 +53,46 @@ namespace GameEngine.TileEngine
             }
         }
 
+        /// <summary>
+        /// Obtiene el origen de la capa
+        /// </summary>
         private Vector2 origin;
         public Vector2 Origin
         {
             get { return origin; }
         }
 
+        /// <summary>
+        /// Obtiene la bandera que indica si la capa es independiente del movimiento de la cámara
+        /// </summary>
         private bool cameraIndependent;
         public bool CameraIndependent
         {
             get { return cameraIndependent; }
         }
 
+        /// <summary>
+        /// Obtiene la dirección de movimiento de la capa
+        /// </summary>
         private TileLayerMovementDirection direction;
         public TileLayerMovementDirection Direction
         {
             get { return direction; }
         }
 
-
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase GameEngine.TileEngine.TileLayer que permite
+        /// crear una instancia completa con transparencia, visibilidad, posición,escala,velocidad, independencia de cámara y dirección de movimiento
+        /// </summary>
+        /// <param name="tileCatalog">Cátalogo de baldosas</param>
+        /// <param name="tileMap">Mapa de baldosas</param>
+        /// <param name="transparency">Transparencia de la capa</param>
+        /// <param name="visible">Visibilidad de la capa</param>
+        /// <param name="position">Posición de la capa</param>
+        /// <param name="zoomScale">Escala inicial de la capa</param>
+        /// <param name="velocity">Velocidad de desplazamiento de la capa</param>
+        /// <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
+        /// <param name="direction">Dirección de desplazamiento de la capa cuando esta es independiente de la cámara</param>
         public TileLayer(TileCatalog tileCatalog, TileMap tileMap,float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, bool cameraIndependent, TileLayerMovementDirection direction)
         {
             this.TileCatalog = tileCatalog;
@@ -56,10 +106,19 @@ namespace GameEngine.TileEngine
             this.direction = direction;
         }
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase GameEngine.TileEngine.TileLayer que permite
+        /// crear una instancia solo con un cátalogo y un mapa de baldosas
+        /// </summary>
+        /// <param name="tileCatalog">Cátalogo de baldosas</param>
+        /// <param name="tileMap">Mapa de baldosas</param>
         public TileLayer(TileCatalog tileCatalog, TileMap tileMap)
             : this(tileCatalog, tileMap, 1.0f, true, Vector2.Zero, Vector2.One, Vector2.One, false, TileLayerMovementDirection.None)
         { }
 
+        /// <summary>
+        /// longitud de la capa definida en el número de baldosas en el eje x y y
+        /// </summary>
         public Point Lenght
         {
             get{
@@ -69,6 +128,9 @@ namespace GameEngine.TileEngine
             }
         }
 
+        /// <summary>
+        /// Obtiene el Tamaño de la capa
+        /// </summary>
         public Point Size
         {
             get{
@@ -79,16 +141,23 @@ namespace GameEngine.TileEngine
             }
         }
 
+        /// <summary>
+        /// Obtiene el Tamaño de la baldosa con escala aplicada
+        /// </summary>
         public Vector2 ScaledTileSize
         {
             get
-            {
+            {            
                 float width = this.TileCatalog.Size.X  * this.ZoomScale.X;
                 float height = this.TileCatalog.Size.Y * this.ZoomScale.Y;
                 return new Vector2(width, height);
             }
         }
+        
 
+        /// <summary>
+        /// Obtiene el Tamaño de la capa con escala aplicada
+        /// </summary>
         public Vector2 ScaledSize
         {
             get
@@ -101,6 +170,9 @@ namespace GameEngine.TileEngine
             }
         }
 
+        /// <summary>
+        /// Obtiene el Tamaño de una baldosa individual.
+        /// </summary>
         public Point TileSize
         {
             get

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GameEngine.TileEngine
+namespace AzulEngine.TileEngine
 {
     public enum TileLayerMovementDirection
     {

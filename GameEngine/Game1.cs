@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
-using GameEngine.TileEngine;
-using GameEngine.CameraEngine;
+using AzulEngine.TileEngine;
+using AzulEngine.CameraEngine;
 
 #endregion
 
-namespace GameEngine
+namespace AzulEngine
 {
     /// <summary>
     /// This is the main type for your game

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace GameEngine.CameraEngine
+namespace AzulEngine.CameraEngine
 {
     public class Camera2D
     {

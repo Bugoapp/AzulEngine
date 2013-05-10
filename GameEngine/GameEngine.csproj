@@ -8,7 +8,7 @@
     <ProjectGuid>{BB0445BA-0ED6-4E64-83C7-1630449F3A0E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameEngine</RootNamespace>
+    <RootNamespace>AzulEngine</RootNamespace>
     <AssemblyName>GameEngine</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>

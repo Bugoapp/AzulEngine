@@ -2,28 +2,54 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameEngine.CameraEngine;
+using AzulEngine.CameraEngine;
 
-namespace GameEngine.TileEngine
+namespace AzulEngine.TileEngine
 {
+    /// <summary>
+    /// Representa un componente de baldosas, encargado de
+    /// dibujar las capas y sus componentes
+    /// </summary>
     public class TileComponent: DrawableGameComponent
     {
+        /// <summary>
+        /// Obtiene la cámara de visualización
+        /// </summary>
         private Camera2D camera;
+
         private TileScene tileScene;
+        /// <summary>
+        /// Obtiene la escena que representa un conjunto de capas de baldosas
+        /// </summary>
         public TileScene TileScene
         {
             get { return tileScene; }
         }
 
         private Vector2 baseScreenSize;
+        /// <summary>
+        /// Obtiene o establece la resolución base en un sistema de resolución independiente
+        /// </summary>
         public Vector2 BaseScreenSize
         {
             get { return baseScreenSize; }
             set { baseScreenSize = value; }
         }
 
+        /// <summary>
+        /// Obtiene o establece si la resolución interna es independiente de la resolución del sistema
+        /// </summary>
         public Boolean ResultionIndependent { get; set; }
 
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase GameEngine.TileEngine.TileComponent que recibe como
+        /// parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.
+        /// </summary>
+        /// <param name="game">Objeto tipo Game que representa el tipo principal del juego</param>
+        /// <param name="tileScene">Representa un conjunto de capas de baldosas</param>
+        /// <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
+        /// <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>
         public TileComponent(Game game, TileScene tileScene, Vector2 baseScreenSize, bool resultionIndependent)
             :base(game)
         {
@@ -128,6 +154,12 @@ namespace GameEngine.TileEngine
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Método de optimización de dibujado en pantalla que devuelve los límites de dibujo de baldosas
+        /// </summary>
+        /// <param name="layer">Capa de baldosas que se va a limitar</param>
+        /// <param name="clientBounds">Rectángulo que representa los limites que definirán el cálculo</param>
+        /// <returns>Retorna un objeto de tipo GameEngine.TileEngine.TileDrawLimits</returns>
         public TileDrawLimits GetDrawLimits(TileLayer layer, Rectangle clientBounds)
         {
             int[] xLimit = this.GetAxisLimit(layer.Position.X, layer.ScaledSize.X * camera.Zoom.X, layer.ScaledTileSize.X * camera.Zoom.X, layer.Lenght.X, clientBounds.Width);
@@ -136,6 +168,15 @@ namespace GameEngine.TileEngine
             return tileDrawLimits;
         }
 
+        /// <summary>
+        /// Método de optimización que calcula los límites de dibujado de baldosas tanto para el eje x como el eje y
+        /// </summary>
+        /// <param name="position">Posición actual de la capa de baldosas</param>
+        /// <param name="zoomedScaledSize">Tamaño de la capa con zoom y escala aplicadas</param>
+        /// <param name="zoomedScaledTileSize">Tamaño de la baldosa con zoom y escala aplicadas</param>
+        /// <param name="lenght">Longitud del eje</param>
+        /// <param name="bound">Longitud del rectangulo limitador de un eje</param>
+        /// <returns>Retorna un arreglo de enteros que representan los límites máximos y mínimos de un eje determinado</returns>
         public int[] GetAxisLimit(float position, float zoomedScaledSize, float zoomedScaledTileSize, int lenght, int bound)
         {
             int min = 0;
@@ -166,6 +207,12 @@ namespace GameEngine.TileEngine
             return new int[] { min, max };
         }
 
+
+        /// <summary>
+        /// Posiciona los elementos en pantalla de acuerdo la la posición de la cámara
+        /// </summary>
+        /// <param name="camera">Cámara de visualiación</param>
+        /// <param name="layer">Capa de baldosas</param>
         public void CorrectCamera(ref Camera2D camera, ref TileLayer layer)
         {
             Vector2 displacementRatio = Vector2.Divide(layer.Velocity, camera.Velocity);
@@ -174,6 +221,10 @@ namespace GameEngine.TileEngine
             layer.Position = realPosition;
         }
 
+        /// <summary>
+        /// Mueve la capa de baldosas automaticamente en una dirección determinada por cada fracción de tiempo
+        /// </summary>
+        /// <param name="layer">Referencia a una capa de baldosas</param>
         public void MoveLayer(ref TileLayer layer)
         {
             switch (layer.Direction)
