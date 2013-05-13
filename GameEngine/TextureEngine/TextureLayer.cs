@@ -31,6 +31,11 @@ namespace AzulEngine.TextureEngine
     public class TextureLayer : AbstractLayer
     {
         /// <summary>
+        /// Obtiene o establece el ancla de la textura
+        /// </summary>
+        public Anchor Anchor { get; set; }
+
+        /// <summary>
         /// Obtiene o establece la textura de la textura
         /// </summary>
         public Texture2D Texture { get; set; }
@@ -51,8 +56,16 @@ namespace AzulEngine.TextureEngine
             : base(transparency, visible, position, zoomScale, velocity, cameraIndependent, direction)
         {
             this.Texture = texture;
+            this.Anchor = Anchor.None;
         }
 
+        public TextureLayer(Texture2D texture, float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, bool cameraIndependent, Anchor anchor)
+            : base(transparency, visible, position, zoomScale, velocity, cameraIndependent, LayerMovementDirection.None)
+        {
+            this.Texture = texture;
+            this.Anchor = anchor;
+        }
+        
         /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TextureLayer que permite
         /// crear una instancia completa con sus valores por defecto

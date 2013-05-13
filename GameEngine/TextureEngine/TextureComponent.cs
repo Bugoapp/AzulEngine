@@ -50,7 +50,7 @@ namespace AzulEngine.TextureEngine
             foreach (TextureLayer layer in scene.Layers)
             {
                 AbstractLayer currentLayer = layer;
-                base.CorrectCamera(ref camera, ref currentLayer);
+                base.CorrectCamera(camera, currentLayer);
 
             }
         }
@@ -65,13 +65,28 @@ namespace AzulEngine.TextureEngine
                     if (camera.Changed)
                     {
                         AbstractLayer currentLayer = layer;
-                        base.CorrectCamera(ref camera, ref currentLayer);
+                        base.CorrectCamera(camera, currentLayer);
                     }
+
                 }
                 else
                 {
-                    AbstractLayer currentLayer = layer;
-                    base.MoveLayer(ref currentLayer);
+                    
+                    if (layer.Anchor == Anchor.None)
+                    {                       
+                        if (layer.Direction != LayerMovementDirection.None)
+                        {
+                            AbstractLayer currentLayer = layer;
+                            base.MoveLayer(currentLayer);
+                        }
+                    }
+                    else
+                    {
+                        TextureLayer currentLayer = layer;
+                        this.CalculatePositionWithAnchor(currentLayer);
+                    }
+                    
+            
                 }
             }
         }
@@ -80,20 +95,7 @@ namespace AzulEngine.TextureEngine
         {
             SpriteBatch spriteBatch = Game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
             Vector3 screenScalingFactor;
-            Rectangle clientBounds;
-            if (this.ResultionIndependent)
-            {
-                float horScaling = (float)this.GraphicsDevice.PresentationParameters.BackBufferWidth / baseScreenSize.X;
-                float verScaling = (float)this.GraphicsDevice.PresentationParameters.BackBufferHeight / baseScreenSize.Y;
-                screenScalingFactor = new Vector3(horScaling, verScaling, 1);
-                clientBounds = new Rectangle(0, 0, (int)this.baseScreenSize.X, (int)this.baseScreenSize.Y);
-            }
-            else
-            {
-                screenScalingFactor = new Vector3(1, 1, 1);
-                clientBounds = new Rectangle(0, 0, (int)this.GraphicsDevice.Viewport.Width, (int)this.GraphicsDevice.Viewport.Height);
-            }
-
+            base.GetScreenScalingFactor(out screenScalingFactor);
             Matrix globalTransformation = Matrix.CreateScale(screenScalingFactor);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, globalTransformation);
 
@@ -115,6 +117,40 @@ namespace AzulEngine.TextureEngine
             spriteBatch.End();
             base.Draw(gameTime);
 
+        }
+
+        /// <summary>
+        /// Calcula la posición de la textura con respecto a un ancla
+        /// </summary>
+        /// <param name="layer">Capa de texturas</param>
+        public void CalculatePositionWithAnchor(TextureLayer layer)
+        {
+            float xPosition = 0;
+            float yPosition = 0;
+            Rectangle clientBounds;
+            base.GetClientBounds(out clientBounds);
+            switch (layer.Anchor)
+            {
+                case Anchor.UpperLeft:
+                    xPosition = layer.Origin.X;
+                    yPosition = layer.Origin.Y;
+                    break;
+                case Anchor.UpperRight:
+                    xPosition = clientBounds.Width - (layer.Size.X + layer.Origin.X);
+                    yPosition = layer.Origin.Y;
+                    break;
+                case Anchor.LowerLeft:
+                    xPosition = layer.Origin.X;
+                    yPosition = clientBounds.Height - (layer.Size.Y + layer.Origin.Y);
+                    break;
+                case Anchor.LowerRight:
+                    xPosition = clientBounds.Width - (layer.Size.X + layer.Origin.X);
+                    yPosition = clientBounds.Height - (layer.Size.Y + layer.Origin.Y);
+                    break;
+
+            }
+            layer.Position = new Vector2(xPosition,yPosition);
+            
         }
 
     }

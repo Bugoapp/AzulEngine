@@ -66,7 +66,7 @@ namespace AzulEngine.EngineUtils
         /// </summary>
         /// <param name="camera">Cámara de visualiación</param>
         /// <param name="layer">Capa de texturas</param>
-        public void CorrectCamera(ref Camera2D camera, ref AbstractLayer layer)
+        public void CorrectCamera(Camera2D camera, AbstractLayer layer)
         {
             Vector2 displacementRatio = Vector2.Divide(layer.Velocity, camera.Velocity);
             Vector2 realDisplacement = Vector2.Multiply(camera.Position, displacementRatio);
@@ -77,8 +77,8 @@ namespace AzulEngine.EngineUtils
         /// <summary>
         /// Mueve la capa automaticamente en una dirección determinada por cada fracción de tiempo
         /// </summary>
-        /// <param name="layer">Referencia a una capa de baldosas</param>
-        public void MoveLayer(ref AbstractLayer layer)
+        /// <param name="layer">Capa de texturas</param>
+        public void MoveLayer(AbstractLayer layer)
         {
             switch (layer.Direction)
             {
@@ -108,6 +108,40 @@ namespace AzulEngine.EngineUtils
                     break;
             }
         }
-      
+
+        /// <summary>
+        /// Obtiene los límites de la ventana cliente teniendo en cuenta la independencia de la resolución
+        /// </summary>
+        /// <param name="clientBounds">Referencia a un rectángulo que contendrá los límites de la ventana cliente</param>
+        public void GetClientBounds(out Rectangle clientBounds)
+        {
+
+            if (this.ResultionIndependent)
+            {
+                clientBounds = new Rectangle(0, 0, (int)this.baseScreenSize.X, (int)this.baseScreenSize.Y);
+            }
+            else
+            {
+                clientBounds = new Rectangle(0, 0, (int)this.GraphicsDevice.Viewport.Width, (int)this.GraphicsDevice.Viewport.Height);
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el factor de escala de la pantalla
+        /// </summary>
+        /// <param name="screenScalingFactor">Referencia a un Vector3 que contendrá el factor de escalamiento global</param>
+        public void GetScreenScalingFactor(out Vector3 screenScalingFactor)
+        {
+            if (this.ResultionIndependent)
+            {
+                float horScaling = (float)this.GraphicsDevice.PresentationParameters.BackBufferWidth / baseScreenSize.X;
+                float verScaling = (float)this.GraphicsDevice.PresentationParameters.BackBufferHeight / baseScreenSize.Y;
+                screenScalingFactor = new Vector3(horScaling, verScaling, 1);
+            }
+            else
+            {
+                screenScalingFactor = Vector3.One;
+            }
+        }
     }
 }

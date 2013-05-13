@@ -47,7 +47,7 @@ namespace AzulEngine.TileEngine
             foreach (TileLayer layer in scene.Layers)
             {
                 AbstractLayer currentLayer = layer;
-                this.CorrectCamera(ref camera, ref currentLayer);               
+                this.CorrectCamera(camera, currentLayer);               
             }
         }
 
@@ -58,15 +58,19 @@ namespace AzulEngine.TileEngine
             {
                 if (!layer.CameraIndependent)
                 {
+                    
                     if (camera.Changed)
                     {
                         AbstractLayer currentLayer = layer;
-                        this.CorrectCamera(ref camera, ref currentLayer);
+                        this.CorrectCamera(camera, currentLayer);
                     }
                 }
                 else{
                     AbstractLayer currentLayer = layer;
-                    this.MoveLayer(ref currentLayer);           
+                    if (layer.Direction != LayerMovementDirection.None)
+                    {
+                        base.MoveLayer(currentLayer);
+                    }          
                 }
             }
         }
@@ -76,19 +80,9 @@ namespace AzulEngine.TileEngine
 
             SpriteBatch spriteBatch = Game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
             Vector3 screenScalingFactor;
+            base.GetScreenScalingFactor(out screenScalingFactor);
             Rectangle clientBounds;
-            if (this.ResultionIndependent)
-            {
-                float horScaling = (float)this.GraphicsDevice.PresentationParameters.BackBufferWidth / baseScreenSize.X;
-                float verScaling = (float)this.GraphicsDevice.PresentationParameters.BackBufferHeight / baseScreenSize.Y;
-                screenScalingFactor = new Vector3(horScaling, verScaling, 1);
-                clientBounds = new Rectangle(0, 0, (int)this.baseScreenSize.X, (int)this.baseScreenSize.Y);
-            }
-            else
-            {
-                screenScalingFactor = new Vector3(1, 1, 1);
-                clientBounds = new Rectangle(0, 0, (int)this.GraphicsDevice.Viewport.Width, (int)this.GraphicsDevice.Viewport.Height);
-            }
+            base.GetClientBounds(out clientBounds);
 
             Matrix globalTransformation = Matrix.CreateScale(screenScalingFactor);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, globalTransformation);

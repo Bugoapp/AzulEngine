@@ -110,18 +110,30 @@
             <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
             <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>
         </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.CorrectCamera(AzulEngine.CameraEngine.Camera2D@,AzulEngine.EngineUtils.AbstractLayer@)">
+        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.CorrectCamera(AzulEngine.CameraEngine.Camera2D,AzulEngine.EngineUtils.AbstractLayer)">
             <summary>
             Posiciona los elementos en pantalla de acuerdo la la posición de la cámara
             </summary>
             <param name="camera">Cámara de visualiación</param>
             <param name="layer">Capa de texturas</param>
         </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.MoveLayer(AzulEngine.EngineUtils.AbstractLayer@)">
+        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.MoveLayer(AzulEngine.EngineUtils.AbstractLayer)">
             <summary>
             Mueve la capa automaticamente en una dirección determinada por cada fracción de tiempo
             </summary>
-            <param name="layer">Referencia a una capa de baldosas</param>
+            <param name="layer">Capa de texturas</param>
+        </member>
+        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.GetClientBounds(Microsoft.Xna.Framework.Rectangle@)">
+            <summary>
+            Obtiene los límites de la ventana cliente teniendo en cuenta la independencia de la resolución
+            </summary>
+            <param name="clientBounds">Referencia a un rectángulo que contendrá los límites de la ventana cliente</param>
+        </member>
+        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.GetScreenScalingFactor(Microsoft.Xna.Framework.Vector3@)">
+            <summary>
+            Obtiene el factor de escala de la pantalla
+            </summary>
+            <param name="screenScalingFactor">Referencia a un Vector3 que contendrá el factor de escalamiento global</param>
         </member>
         <member name="P:AzulEngine.EngineUtils.AbstractComponent`1.Camera">
             <summary>
@@ -197,6 +209,11 @@
             crear una instancia completa con sus valores por defecto
             </summary>
             <param name="texture">Textura de la capa</param>
+        </member>
+        <member name="P:AzulEngine.TextureEngine.TextureLayer.Anchor">
+            <summary>
+            Obtiene o establece el ancla de la textura
+            </summary>
         </member>
         <member name="P:AzulEngine.TextureEngine.TextureLayer.Texture">
             <summary>
@@ -404,6 +421,12 @@
             <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
             <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>
         </member>
+        <member name="M:AzulEngine.TextureEngine.TextureComponent.CalculatePositionWithAnchor(AzulEngine.TextureEngine.TextureLayer)">
+            <summary>
+            Calcula la posición de la textura con respecto a un ancla
+            </summary>
+            <param name="layer">Capa de texturas</param>
+        </member>
         <member name="T:AzulEngine.CameraEngine.Camera2D">
             <summary>
             Clase que representa una camara de juego
@@ -559,6 +582,52 @@
             Enumeración que Representa las direcciones de movimiento de una capa de baldosas
             </summary>
         </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.None">
+            <summary>
+            No tiene movimiento
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.Up">
+            <summary>
+            Movimiento hacia arriba
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.Down">
+            <summary>
+            Movimiento hacia abajo
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.Left">
+            <summary>
+            Movimiento hacia la izquierda
+            </summary>
+            
+        </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.Right">
+            <summary>
+            Movimiento hacia la derecha
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.UpperLeft">
+            <summary>
+            Movimiento hacia la arriba y la izquierda
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.UpperRight">
+            <summary>
+            Movimiento hacia la arriba y la derecha
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.LowerLeft">
+            <summary>
+            Movimiento hacia la abajo y la izquierda
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.LayerMovementDirection.LowerRight">
+            <summary>
+            Movimiento hacia la abajo y la derecha
+            </summary>
+        </member>
         <member name="T:AzulEngine.TileEngine.TileDrawLimits">
             <summary>
             Clase que representa los limites de una capa de baldosas a dibujar
@@ -615,6 +684,36 @@
             <summary>
             Obtiene o establece el índice de la baldosa dentro de la categoría de baldosas.
             </summary>
+        </member>
+        <member name="T:AzulEngine.EngineUtils.Anchor">
+            <summary>
+            Enumeración que representa las anclas para los componentes de texturas
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.None">
+            <summary>
+            Sin anclaje
+            </summary>  
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.UpperLeft">
+            <summary>
+            Anclado arriba y a la izquierda
+            </summary>        
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.UpperRight">
+            <summary>
+            Anclado arriba y a la derecha
+            </summary>  
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.LowerLeft">
+            <summary>
+            Anclado abajo y a la izquierda
+            </summary>  
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.LowerRight">
+            <summary>
+            Anclado abajo y a la derecha
+            </summary>  
         </member>
     </members>
 </doc>

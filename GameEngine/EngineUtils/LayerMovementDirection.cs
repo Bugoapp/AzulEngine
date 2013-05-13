@@ -26,14 +26,42 @@ namespace AzulEngine.EngineUtils
     /// </summary>
     public enum LayerMovementDirection
     {
+        /// <summary>
+        /// No tiene movimiento
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Movimiento hacia arriba
+        /// </summary>
         Up = 1,
+        /// <summary>
+        /// Movimiento hacia abajo
+        /// </summary>
         Down = 2,
+        /// <summary>
+        /// Movimiento hacia la izquierda
+        /// </summary>
+        /// 
         Left = 3,
+        /// <summary>
+        /// Movimiento hacia la derecha
+        /// </summary>
         Right = 4,
+        /// <summary>
+        /// Movimiento hacia la arriba y la izquierda
+        /// </summary>
         UpperLeft = 5,
+        /// <summary>
+        /// Movimiento hacia la arriba y la derecha
+        /// </summary>
         UpperRight = 6,
+        /// <summary>
+        /// Movimiento hacia la abajo y la izquierda
+        /// </summary>
         LowerLeft = 7,
+        /// <summary>
+        /// Movimiento hacia la abajo y la derecha
+        /// </summary>
         LowerRight = 8
     }
 }

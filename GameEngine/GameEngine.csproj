@@ -61,6 +61,7 @@
     <Compile Include="EngineUtils\AbstractComponent.cs" />
     <Compile Include="EngineUtils\AbstractLayer.cs" />
     <Compile Include="EngineUtils\AbstractScene.cs" />
+    <Compile Include="EngineUtils\Anchor.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

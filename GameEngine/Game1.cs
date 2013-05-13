@@ -40,9 +40,9 @@ namespace AzulEngine
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             baseScreenSize = new Vector2(dv.Width, dv.Height);
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
-            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 768;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();           
 
         }
@@ -106,8 +106,8 @@ namespace AzulEngine
             TileComponent component = new TileComponent(this, scene, baseScreenSize, resultionIndependent);
             this.Components.Add(component);
 
-            TextureLayer tLayer1 = new TextureLayer(this.texture1, 1f, false, new Vector2(0f), Vector2.One, new Vector2(1.5f,1.5f), false, LayerMovementDirection.None);
-            TextureLayer tLayer2 = new TextureLayer(this.texture2, 0.5f, false, new Vector2(10f), Vector2.One, Vector2.One, false, LayerMovementDirection.None);
+            TextureLayer tLayer1 = new TextureLayer(this.texture1, 1f, true, new Vector2(20f), Vector2.One, new Vector2(1.5f,1.5f), true, Anchor.LowerRight);
+            TextureLayer tLayer2 = new TextureLayer(this.texture2, 0.5f, true, new Vector2(10f), Vector2.One, Vector2.One, false, LayerMovementDirection.None);
             
             TextureScene tScene = new TextureScene();
             tScene.AddLayer(tLayer1);
