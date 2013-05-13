@@ -1,4 +1,4 @@
-﻿//<Game engine for monogame>
+﻿//<AzulEngine - Game engine for monogame>
 //Copyright (C) <2013>
 
 //This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,14 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using AzulEngine.EngineUtils;
 
 namespace AzulEngine.TileEngine
 {
     /// <summary>
     /// Clase que representa una capa de baldosas
     /// </summary>
-    public class TileLayer
+    public class TileLayer : AbstractLayer
     {
         /// <summary>
         /// Obtiene o establece el catálogo de baldosas
@@ -34,67 +35,6 @@ namespace AzulEngine.TileEngine
         /// Obtiene o establece el mapa de baldosas
         /// </summary>
         public TileMap TileMap { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece la visibilidad de la capa
-        /// </summary>
-        public Boolean Visible {get; set;}
-
-        /// <summary>
-        /// Obtiene o establece la posición de la capa
-        /// </summary>
-        public Vector2 Position {get; set;}
-
-        /// <summary>
-        /// Obtiene o establece la escala de la capa
-        /// </summary>
-        public Vector2 ZoomScale { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece la velocidad de desplazamiento de la capa
-        /// </summary>
-        public Vector2 Velocity { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece la transparencia de la capa
-        /// </summary>
-        public float transparency;
-        public float Transparency
-        {
-            get { return this.transparency; }
-
-            set
-            {
-                transparency = MathHelper.Clamp(value, 0, 1f);
-            }
-        }
-
-        /// <summary>
-        /// Obtiene el origen de la capa
-        /// </summary>
-        private Vector2 origin;
-        public Vector2 Origin
-        {
-            get { return origin; }
-        }
-
-        /// <summary>
-        /// Obtiene la bandera que indica si la capa es independiente del movimiento de la cámara
-        /// </summary>
-        private bool cameraIndependent;
-        public bool CameraIndependent
-        {
-            get { return cameraIndependent; }
-        }
-
-        /// <summary>
-        /// Obtiene la dirección de movimiento de la capa
-        /// </summary>
-        private TileLayerMovementDirection direction;
-        public TileLayerMovementDirection Direction
-        {
-            get { return direction; }
-        }
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileLayer que permite
@@ -109,17 +49,11 @@ namespace AzulEngine.TileEngine
         /// <param name="velocity">Velocidad de desplazamiento de la capa</param>
         /// <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
         /// <param name="direction">Dirección de desplazamiento de la capa cuando esta es independiente de la cámara</param>
-        public TileLayer(TileCatalog tileCatalog, TileMap tileMap,float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, bool cameraIndependent, TileLayerMovementDirection direction)
+        public TileLayer(TileCatalog tileCatalog, TileMap tileMap,float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, bool cameraIndependent, LayerMovementDirection direction)
+            : base(transparency, visible, position, zoomScale, velocity, cameraIndependent, direction)
         {
             this.TileCatalog = tileCatalog;
             this.TileMap = tileMap;
-            this.transparency = transparency;
-            this.Visible = visible;
-            this.Position = this.origin = position;
-            this.ZoomScale = zoomScale;
-            this.Velocity = velocity;
-            this.cameraIndependent = cameraIndependent;
-            this.direction = direction;
         }
 
         /// <summary>
@@ -129,7 +63,7 @@ namespace AzulEngine.TileEngine
         /// <param name="tileCatalog">Cátalogo de baldosas</param>
         /// <param name="tileMap">Mapa de baldosas</param>
         public TileLayer(TileCatalog tileCatalog, TileMap tileMap)
-            : this(tileCatalog, tileMap, 1.0f, true, Vector2.Zero, Vector2.One, Vector2.One, false, TileLayerMovementDirection.None)
+            : this(tileCatalog, tileMap, 1.0f, true, Vector2.Zero, Vector2.One, Vector2.One, false, LayerMovementDirection.None)
         { }
 
         /// <summary>
@@ -147,7 +81,7 @@ namespace AzulEngine.TileEngine
         /// <summary>
         /// Obtiene el Tamaño de la capa
         /// </summary>
-        public Point Size
+        public override Point Size
         {
             get{
                 Point lenght = this.Lenght;
@@ -174,7 +108,7 @@ namespace AzulEngine.TileEngine
         /// <summary>
         /// Obtiene el Tamaño de la capa con escala aplicada
         /// </summary>
-        public Vector2 ScaledSize
+        public override Vector2 ScaledSize
         {
             get
             {
@@ -196,7 +130,5 @@ namespace AzulEngine.TileEngine
                 return this.TileCatalog.Size;
             }
         }
-
-
     }
 }

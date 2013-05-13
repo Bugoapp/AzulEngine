@@ -1,4 +1,4 @@
-﻿//<Game engine for monogame>
+﻿//<AzulEngine - Game engine for monogame>
 //Copyright (C) <2013>
 
 //This program is free software: you can redistribute it and/or modify
@@ -19,13 +19,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AzulEngine.TileEngine
+namespace AzulEngine.EngineUtils
 {
     /// <summary>
-    /// Enumaeración que Representa las direcciones de movimiento de una capa de baldosas
-    /// 
+    /// Enumeración que Representa las direcciones de movimiento de una capa de baldosas
     /// </summary>
-    public enum TileLayerMovementDirection
+    public enum LayerMovementDirection
     {
         None = 0,
         Up = 1,
@@ -35,6 +34,6 @@ namespace AzulEngine.TileEngine
         UpperLeft = 5,
         UpperRight = 6,
         LowerLeft = 7,
-        LowerRigth = 8
+        LowerRight = 8
     }
 }

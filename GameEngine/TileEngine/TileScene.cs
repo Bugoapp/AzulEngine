@@ -1,4 +1,4 @@
-﻿//<Game engine for monogame>
+﻿//<AzulEngine - Game engine for monogame>
 //Copyright (C) <2013>
 
 //This program is free software: you can redistribute it and/or modify
@@ -16,33 +16,23 @@
 
 using System;
 using System.Collections.Generic;
+using AzulEngine.EngineUtils;
 
 namespace AzulEngine.TileEngine
 {
     /// <summary>
     /// Clase que representa una escena de baldosas y que contiene varias capas a dibujar
     /// </summary>
-    public class TileScene
+    public class TileScene : AbstractScene<TileLayer>
     {
-
-        private List<TileLayer> layers;
-        /// <summary>
-        /// Obtiene una lista generica que contiene las capas de la escena
-        /// </summary>
-        public List<TileLayer> Layers
-        {
-            get { return layers; }
-        }
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileScene que recibe
-        /// como parametros una colección de capas y la visibilidad de la escena
+        /// como parametros una colección de capas
         /// </summary>
-        /// <param name="layers">Cátalogo de baldosas</param>
+        /// <param name="layers">Colección de capas de tipo AzulEngine.TileEngine.TileLayer</param>
         public TileScene(List<TileLayer> layers)
-        {
-            this.layers = layers;
-        }
+            :base(layers)
+        { }
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileScene que no recibe parametros
@@ -50,25 +40,6 @@ namespace AzulEngine.TileEngine
         public TileScene()
             :this(new List<TileLayer>())
         { }
-
-        /// <summary>
-        /// Metodo que inserta una capa dentro de la colección de capas
-        /// </summary>
-        /// <param name="layer">Capa a insertar</param>
-        public void AddLayer(TileLayer layer)
-        {
-            this.layers.Add(layer);
-        }
-
-        /// <summary>
-        /// Metodo que obtiene una capa desde la colección de capas
-        /// </summary>
-        /// <param name="index">Indice de la capa a obtener</param>
-        /// <returns>Retorna una instancia de tipo AzulEngine.TileEngine.Tile</returns>
-        public TileLayer GetLayer(int index)
-        {
-            return this.layers[index];
-        }
 
 
     }

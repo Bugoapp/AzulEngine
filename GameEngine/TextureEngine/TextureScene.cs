@@ -16,27 +16,32 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using AzulEngine.EngineUtils;
 
-namespace AzulEngine.TileEngine
+namespace AzulEngine.TextureEngine
 {
     /// <summary>
-    /// Clase que representa una baldosa de una capa de baldosas
+    /// Clase que representa una escena de texturas y que contiene varias capas a dibujar
     /// </summary>
-    public class Tile
+    public class TextureScene : AbstractScene<TextureLayer>
     {
         /// <summary>
-        /// Obtiene o establece el índice de la baldosa dentro de la categoría de baldosas.
+        /// Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureScene que recibe
+        /// como parametros una colección de capas
         /// </summary>
-        public Int32 Index { get; set; }
+        /// <param name="layers">Colección de capas de tipo AzulEngine.TextureEngine.TextureLayer</param>
+        public TextureScene(List<TextureLayer> layers)
+            :base(layers)
+        {}
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.Tile 
-        /// con el patrón especificado que indica el índice de la baldosa.
+        /// Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureLayer que no recibe parametros
         /// </summary>
-        /// <param name="tipo">Provides a snapshot of timing values.</param>
-        public Tile(Int32 tipo)
-        {
-            this.Index = tipo;
-        }
+        public TextureScene()
+            : this(new List<TextureLayer>())
+        { }
+
     }
 }

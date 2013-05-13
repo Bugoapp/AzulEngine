@@ -14,133 +14,15 @@
             The main entry point for the application.
             </summary>
         </member>
-        <member name="T:AzulEngine.EngineUtils.AbstractLayer">
-            <summary>
-            Clase abstracta que representa una capa
-            </summary>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractLayer.#ctor(System.Single,System.Boolean,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,AzulEngine.EngineUtils.LayerMovementDirection)">
-            <summary>
-            Constructor de la clase abstracta AzulEngine.TileEngine.AbstractLayer que permite
-            crear una instancia completa con transparencia, visibilidad, posición,escala,velocidad, independencia de cámara y dirección de movimiento
-            </summary>
-            <param name="transparency">Transparencia de la capa</param>
-            <param name="visible">Visibilidad de la capa</param>
-            <param name="position">Posición de la capa</param>
-            <param name="zoomScale">Escala inicial de la capa</param>
-            <param name="velocity">Velocidad de desplazamiento de la capa</param>
-            <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
-            <param name="direction">Dirección de desplazamiento de la capa cuando esta es independiente de la cámara</param>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractLayer.#ctor">
-            <summary>
-            Constructor de la clase abstracta AzulEngine.TileEngine.AbstractLayer que permite
-            crear una instancia con valores pore defecto
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.Visible">
-            <summary>
-            Obtiene o establece la visibilidad de la capa
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.Position">
-            <summary>
-            Obtiene o establece la posición de la capa
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.ZoomScale">
-            <summary>
-            Obtiene o establece la escala de la capa
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.Velocity">
-            <summary>
-            Obtiene o establece la velocidad de desplazamiento de la capa
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.Transparency">
-            <summary>
-            Obtiene o establece la transparencia de la capa
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.Origin">
-            <summary>
-            Obtiene el origen de la capa
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.CameraIndependent">
-            <summary>
-            Obtiene la bandera que indica si la capa es independiente del movimiento de la cámara
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.Direction">
-            <summary>
-            Obtiene la dirección de movimiento de la capa
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.Size">
-            <summary>
-            Obtiene el Tamaño de la capa
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractLayer.ScaledSize">
-            <summary>
-            Obtiene el Tamaño de la capa con escala aplicada
-            </summary>
-        </member>
         <member name="T:AzulEngine.TileEngine.TileComponent">
             <summary>
             Representa un componente de baldosas, encargado de
             dibujar las capas y sus componentes
             </summary>
         </member>
-        <member name="T:AzulEngine.EngineUtils.AbstractComponent`1">
-            <summary>
-            Representa un componente astracto
-            </summary>
-            <typeparam name="T">Representa el tipo de la escena a utilizar</typeparam>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.#ctor(Microsoft.Xna.Framework.Game,`0,Microsoft.Xna.Framework.Vector2,System.Boolean)">
-            <summary>
-            Constructor de la clase abstracta AzulEngine.EngineUtils.AbstractComponent que recibe como
-            parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.
-            </summary>
-            <param name="game">Objeto tipo Game que representa el tipo principal del juego</param>
-            <param name="scene">Representa un conjunto de capas</param>
-            <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
-            <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.CorrectCamera(AzulEngine.CameraEngine.Camera2D@,AzulEngine.EngineUtils.AbstractLayer@)">
-            <summary>
-            Posiciona los elementos en pantalla de acuerdo la la posición de la cámara
-            </summary>
-            <param name="camera">Cámara de visualiación</param>
-            <param name="layer">Capa de texturas</param>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractComponent`1.MoveLayer(AzulEngine.EngineUtils.AbstractLayer@)">
-            <summary>
-            Mueve la capa automaticamente en una dirección determinada por cada fracción de tiempo
-            </summary>
-            <param name="layer">Referencia a una capa de baldosas</param>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractComponent`1.Camera">
+        <member name="F:AzulEngine.TileEngine.TileComponent.camera">
             <summary>
             Obtiene la cámara de visualización
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractComponent`1.Scene">
-            <summary>
-            Obtiene la escena que representa un conjunto de capas
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractComponent`1.BaseScreenSize">
-            <summary>
-            Obtiene o establece la resolución base en un sistema de resolución independiente
-            </summary>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractComponent`1.ResultionIndependent">
-            <summary>
-            Obtiene o establece si la resolución interna es independiente de la resolución del sistema
             </summary>
         </member>
         <member name="M:AzulEngine.TileEngine.TileComponent.#ctor(Microsoft.Xna.Framework.Game,AzulEngine.TileEngine.TileScene,Microsoft.Xna.Framework.Vector2,System.Boolean)">
@@ -172,9 +54,52 @@
             <param name="bound">Longitud del rectangulo limitador de un eje</param>
             <returns>Retorna un arreglo de enteros que representan los límites máximos y mínimos de un eje determinado</returns>
         </member>
+        <member name="M:AzulEngine.TileEngine.TileComponent.CorrectCamera(AzulEngine.CameraEngine.Camera2D@,AzulEngine.TileEngine.TileLayer@)">
+            <summary>
+            Posiciona los elementos en pantalla de acuerdo la la posición de la cámara
+            </summary>
+            <param name="camera">Cámara de visualiación</param>
+            <param name="layer">Capa de baldosas</param>
+        </member>
+        <member name="M:AzulEngine.TileEngine.TileComponent.MoveLayer(AzulEngine.TileEngine.TileLayer@)">
+            <summary>
+            Mueve la capa de baldosas automaticamente en una dirección determinada por cada fracción de tiempo
+            </summary>
+            <param name="layer">Referencia a una capa de baldosas</param>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileComponent.Scene">
+            <summary>
+            Obtiene la escena que representa un conjunto de capas de baldosas
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileComponent.BaseScreenSize">
+            <summary>
+            Obtiene o establece la resolución base en un sistema de resolución independiente
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileComponent.ResultionIndependent">
+            <summary>
+            Obtiene o establece si la resolución interna es independiente de la resolución del sistema
+            </summary>
+        </member>
         <member name="T:AzulEngine.TextureEngine.TextureLayer">
             <summary>
             Clase que representa una capa compuesta de una sola textura
+            </summary>
+        </member>
+        <member name="F:AzulEngine.TextureEngine.TextureLayer.cameraIndependent">
+            <summary>
+            Obtiene la bandera que indica si la textura es independiente del movimiento de la cámara
+            </summary>
+        </member>
+        <member name="F:AzulEngine.TextureEngine.TextureLayer.direction">
+            <summary>
+            Obtiene la dirección de movimiento de la textura
+            </summary>
+        </member>
+        <member name="F:AzulEngine.TextureEngine.TextureLayer.transparency">
+            <summary>
+            Obtiene o establece la transparencia de la textura
             </summary>
         </member>
         <member name="M:AzulEngine.TextureEngine.TextureLayer.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Single,System.Boolean,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,AzulEngine.EngineUtils.LayerMovementDirection)">
@@ -191,12 +116,25 @@
             <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
             <param name="direction">Dirección de desplazamiento de la capa cuando esta es independiente de la cámara</param>
         </member>
-        <member name="M:AzulEngine.TextureEngine.TextureLayer.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D)">
+        <member name="P:AzulEngine.TextureEngine.TextureLayer.Visible">
             <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TextureLayer que permite
-            crear una instancia completa con sus valores por defecto
+            Obtiene o establece la visibilidad de la textura
             </summary>
-            <param name="texture">Textura de la capa</param>
+        </member>
+        <member name="P:AzulEngine.TextureEngine.TextureLayer.Position">
+            <summary>
+            Obtiene o establece la posición de la textura
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TextureEngine.TextureLayer.ZoomScale">
+            <summary>
+            Obtiene o establece la escala de la textura
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TextureEngine.TextureLayer.Velocity">
+            <summary>
+            Obtiene o establece la velocidad de desplazamiento de la textura
+            </summary>
         </member>
         <member name="P:AzulEngine.TextureEngine.TextureLayer.Texture">
             <summary>
@@ -211,59 +149,6 @@
         <member name="P:AzulEngine.TextureEngine.TextureLayer.ScaledSize">
             <summary>
             Obtiene el Tamaño de la textura con escala aplicada
-            </summary>
-        </member>
-        <member name="T:AzulEngine.EngineUtils.AbstractScene`1">
-            <summary>
-            Clase abstracta que representa una escena y que contiene varias capas a dibujar
-            </summary>
-            <typeparam name="T">Representa el tipo de la capa a utilizar</typeparam>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractScene`1.#ctor(System.Collections.Generic.List{`0})">
-            <summary>
-            Constructor de la clase abstracta AzulEngine.EngineUtils.AbstractScene que recibe
-            como parametros una colección de capas
-            </summary>
-            <param name="layers">Colección de capas de tipo T</param>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractScene`1.#ctor">
-            <summary>
-            Constructor de la clase abstracta AzulEngine.EngineUtils.AbstractScene que no recibe parametros
-            </summary>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractScene`1.AddLayer(`0)">
-            <summary>
-            Metodo que inserta una capa dentro de la colección de capas
-            </summary>
-            <param name="layer">Capa a insertar</param>
-        </member>
-        <member name="M:AzulEngine.EngineUtils.AbstractScene`1.GetLayer(System.Int32)">
-            <summary>
-            Metodo que obtiene una capa desde la colección de capas
-            </summary>
-            <param name="index">Indice de la capa a obtener</param>
-            <returns>Retorna una instancia de tipo T</returns>
-        </member>
-        <member name="P:AzulEngine.EngineUtils.AbstractScene`1.Layers">
-            <summary>
-            Obtiene una lista generica que contiene las capas de la escena
-            </summary>
-        </member>
-        <member name="T:AzulEngine.TextureEngine.TextureScene">
-            <summary>
-            Clase que representa una escena de texturas y que contiene varias capas a dibujar
-            </summary>
-        </member>
-        <member name="M:AzulEngine.TextureEngine.TextureScene.#ctor(System.Collections.Generic.List{AzulEngine.TextureEngine.TextureLayer})">
-            <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureScene que recibe
-            como parametros una colección de capas
-            </summary>
-            <param name="layers">Colección de capas de tipo AzulEngine.TextureEngine.TextureLayer</param>
-        </member>
-        <member name="M:AzulEngine.TextureEngine.TextureScene.#ctor">
-            <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureLayer que no recibe parametros
             </summary>
         </member>
         <member name="T:AzulEngine.TileEngine.TileLayer">
@@ -304,6 +189,46 @@
             Obtiene o establece el mapa de baldosas
             </summary>
         </member>
+        <member name="P:AzulEngine.TileEngine.TileLayer.Visible">
+            <summary>
+            Obtiene o establece la visibilidad de la capa
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileLayer.Position">
+            <summary>
+            Obtiene o establece la posición de la capa
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileLayer.ZoomScale">
+            <summary>
+            Obtiene o establece la escala de la capa
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileLayer.Velocity">
+            <summary>
+            Obtiene o establece la velocidad de desplazamiento de la capa
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileLayer.Transparency">
+            <summary>
+            Obtiene o establece la transparencia de la capa
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileLayer.Origin">
+            <summary>
+            Obtiene el origen de la capa
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileLayer.CameraIndependent">
+            <summary>
+            Obtiene la bandera que indica si la capa es independiente del movimiento de la cámara
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileLayer.Direction">
+            <summary>
+            Obtiene la dirección de movimiento de la capa
+            </summary>
+        </member>
         <member name="P:AzulEngine.TileEngine.TileLayer.Lenght">
             <summary>
             longitud de la capa definida en el número de baldosas en el eje x y y
@@ -336,14 +261,32 @@
         </member>
         <member name="M:AzulEngine.TileEngine.TileScene.#ctor(System.Collections.Generic.List{AzulEngine.TileEngine.TileLayer})">
             <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileScene que recibe
+            Inicializa una nueva instancia de la clase AzulEngine.TileEngine.Scene que recibe
             como parametros una colección de capas
             </summary>
             <param name="layers">Colección de capas de tipo AzulEngine.TileEngine.TileLayer</param>
         </member>
         <member name="M:AzulEngine.TileEngine.TileScene.#ctor">
             <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileScene que no recibe parametros
+            Inicializa una nueva instancia de la clase AzulEngine.TileEngine.Scene que no recibe parametros
+            </summary>
+        </member>
+        <member name="M:AzulEngine.TileEngine.TileScene.AddLayer(AzulEngine.TileEngine.TileLayer)">
+            <summary>
+            Metodo que inserta una capa dentro de la colección de capas
+            </summary>
+            <param name="layer">Capa a insertar</param>
+        </member>
+        <member name="M:AzulEngine.TileEngine.TileScene.GetLayer(System.Int32)">
+            <summary>
+            Metodo que obtiene una capa desde la colección de capas
+            </summary>
+            <param name="index">Indice de la capa a obtener</param>
+            <returns>Retorna una instancia de tipo AzulEngine.TileEngine.Tile</returns>
+        </member>
+        <member name="P:AzulEngine.TileEngine.TileScene.Layers">
+            <summary>
+            Obtiene una lista generica que contiene las capas de la escena
             </summary>
         </member>
         <member name="T:AzulEngine.TileEngine.TileMap">
@@ -387,22 +330,6 @@
             Obtiene o establece un arreglo bidimensional de objetos AzulEngine.TileEngine.Tile
             </summary>
             <returns>Retorna una instancia de un arreglo bidimensional de tipo AzulEngine.TileEngine.Tile</returns>
-        </member>
-        <member name="T:AzulEngine.TextureEngine.TextureComponent">
-            <summary>
-            Representa un componente de texturas, encargado de
-            dibujarlas
-            </summary>
-        </member>
-        <member name="M:AzulEngine.TextureEngine.TextureComponent.#ctor(Microsoft.Xna.Framework.Game,AzulEngine.TextureEngine.TextureScene,Microsoft.Xna.Framework.Vector2,System.Boolean)">
-            <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureComponent que recibe como
-            parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.
-            </summary>
-            <param name="game">Objeto tipo Game que representa el tipo principal del juego</param>
-            <param name="scene">Representa un conjunto de capas de baldosas</param>
-            <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
-            <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>
         </member>
         <member name="T:AzulEngine.CameraEngine.Camera2D">
             <summary>
@@ -554,11 +481,6 @@
             Obtiene la textura que se utiliza para generar el catálogo
             </summary>
         </member>
-        <member name="T:AzulEngine.EngineUtils.LayerMovementDirection">
-            <summary>
-            Enumeración que Representa las direcciones de movimiento de una capa de baldosas
-            </summary>
-        </member>
         <member name="T:AzulEngine.TileEngine.TileDrawLimits">
             <summary>
             Clase que representa los limites de una capa de baldosas a dibujar
@@ -614,6 +536,82 @@
         <member name="P:AzulEngine.TileEngine.Tile.Index">
             <summary>
             Obtiene o establece el índice de la baldosa dentro de la categoría de baldosas.
+            </summary>
+        </member>
+        <member name="T:AzulEngine.TextureEngine.TextureComponent">
+            <summary>
+            Representa un componente de texturas, encargado de
+            dibujarlas
+            </summary>
+        </member>
+        <member name="F:AzulEngine.TextureEngine.TextureComponent.camera">
+            <summary>
+            Obtiene la cámara de visualización
+            </summary>
+        </member>
+        <member name="M:AzulEngine.TextureEngine.TextureComponent.#ctor(Microsoft.Xna.Framework.Game,AzulEngine.TextureEngine.TextureScene,Microsoft.Xna.Framework.Vector2,System.Boolean)">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureComponent que recibe como
+            parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.
+            </summary>
+            <param name="game">Objeto tipo Game que representa el tipo principal del juego</param>
+            <param name="scene">Representa un conjunto de capas de baldosas</param>
+            <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
+            <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>
+        </member>
+        <member name="P:AzulEngine.TextureEngine.TextureComponent.Scene">
+            <summary>
+            Obtiene la escena que representa un conjunto de capas de baldosas
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TextureEngine.TextureComponent.BaseScreenSize">
+            <summary>
+            Obtiene o establece la resolución base en un sistema de resolución independiente
+            </summary>
+        </member>
+        <member name="P:AzulEngine.TextureEngine.TextureComponent.ResultionIndependent">
+            <summary>
+            Obtiene o establece si la resolución interna es independiente de la resolución del sistema
+            </summary>
+        </member>
+        <member name="T:AzulEngine.TextureEngine.TextureScene">
+            <summary>
+            Clase que representa una escena de texturas y que contiene varias capas a dibujar
+            </summary>
+        </member>
+        <member name="M:AzulEngine.TextureEngine.TextureScene.#ctor(System.Collections.Generic.List{AzulEngine.TextureEngine.TextureLayer})">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureScene que recibe
+            como parametros una colección de capas
+            </summary>
+            <param name="layers">Colección de capas de tipo AzulEngine.TextureEngine.TextureLayer</param>
+        </member>
+        <member name="M:AzulEngine.TextureEngine.TextureScene.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureLayer que no recibe parametros
+            </summary>
+        </member>
+        <member name="M:AzulEngine.TextureEngine.TextureScene.AddLayer(AzulEngine.TextureEngine.TextureLayer)">
+            <summary>
+            Metodo que inserta una capa dentro de la colección de capas
+            </summary>
+            <param name="layer">Capa a insertar</param>
+        </member>
+        <member name="M:AzulEngine.TextureEngine.TextureScene.GetLayer(System.Int32)">
+            <summary>
+            Metodo que obtiene una capa desde la colección de capas
+            </summary>
+            <param name="index">Indice de la capa a obtener</param>
+            <returns>Retorna una instancia de tipo AzulEngine.TileEngine.Tile</returns>
+        </member>
+        <member name="P:AzulEngine.TextureEngine.TextureScene.Layers">
+            <summary>
+            Obtiene una lista generica que contiene las capas de la escena
+            </summary>
+        </member>
+        <member name="T:AzulEngine.EngineUtils.LayerMovementDirection">
+            <summary>
+            Enumeración que Representa las direcciones de movimiento de una capa de baldosas
             </summary>
         </member>
     </members>

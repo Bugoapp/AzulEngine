@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using AzulEngine.TileEngine;
 using AzulEngine.CameraEngine;
+using AzulEngine.EngineUtils;
+using AzulEngine.TextureEngine;
 
 #endregion
 
@@ -22,7 +24,8 @@ namespace AzulEngine
         //test
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D texture;
+        Texture2D texture1;
+        Texture2D texture2;
         TileScene scene;
         Vector2 backgrounScale = Vector2.One;
         Vector2 baseScreenSize;
@@ -40,9 +43,8 @@ namespace AzulEngine
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
             graphics.IsFullScreen = false;
-            this.Window.AllowUserResizing = true;
             graphics.ApplyChanges();           
-            
+
         }
 
         /// <summary>
@@ -69,46 +71,50 @@ namespace AzulEngine
             this.Services.AddService(typeof(SpriteBatch), spriteBatch);
             this.Services.AddService(typeof(Camera2D), camera);
 
-            texture = this.Content.Load<Texture2D>("tex");
-            TileCatalog cat1 = new TileCatalog(texture, 15, 15);
+            texture1 = this.Content.Load<Texture2D>("tex");
+            TileCatalog cat1 = new TileCatalog(texture1, 15, 15);
   
             Random rand = new Random(DateTime.Now.Millisecond);
-            TileMap map1 = new TileMap(100, 5000);
+            TileMap map1 = new TileMap(100, 100);
             for (int i = 0; i < 100; i++)
             {
-                for (int j = 0; j < 5000; j++)
+                for (int j = 0; j < 100; j++)
                 {
                     map1.SetTile(i, j, new Tile(rand.Next(1, cat1.TilePositions.Count)));
                 }
             }
 
-            TileLayer layer1 = new TileLayer(cat1, map1, 0.5f, true, new Vector2(0, 0), new Vector2(2.5f, 2.5f), new Vector2(3f), false, TileLayerMovementDirection.None);
+            TileLayer layer1 = new TileLayer(cat1, map1, 0.5f, true, new Vector2(0, 0), new Vector2(1f, 1f), new Vector2(3f), false, LayerMovementDirection.None);
 
-            texture = this.Content.Load<Texture2D>("tiles2");
+            texture2 = this.Content.Load<Texture2D>("tiles2");
 
-            TileCatalog cat2 = new TileCatalog(texture, 48, 48);
-            TileMap map2 = new TileMap(100, 100);
-            for (int i = 0; i < 100; i++)
+            TileCatalog cat2 = new TileCatalog(texture2, 48, 48);
+            TileMap map2 = new TileMap(10, 500);
+            for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < 100; j++)
+                for (int j = 0; j < 500; j++)
                 {
                     map2.SetTile(i, j, new Tile(rand.Next(1, cat2.TilePositions.Count)));
                 }
             }
-            TileLayer layer2 = new TileLayer(cat2, map2, 1.0f, true, new Vector2(0, 0), new Vector2(1f, 1f), new Vector2(3f), true, TileLayerMovementDirection.Up);
+            TileLayer layer2 = new TileLayer(cat2, map2, 1.0f, true, new Vector2(0, 0), new Vector2(1f, 1f), new Vector2(3f), true, LayerMovementDirection.Up);
 
             scene = new TileScene();
             scene.AddLayer(layer2);
             scene.AddLayer(layer1);
 
-            //foreach (TileLayer layer in scene.Layers)
-            //{
-            //    TileLayer currentLayer = layer;
-            //    this.CorrectCamera(ref camera, ref currentLayer);
-
-            //}
             TileComponent component = new TileComponent(this, scene, baseScreenSize, resultionIndependent);
             this.Components.Add(component);
+
+            TextureLayer tLayer1 = new TextureLayer(this.texture1, 1f, false, new Vector2(0f), Vector2.One, new Vector2(1.5f,1.5f), false, LayerMovementDirection.None);
+            TextureLayer tLayer2 = new TextureLayer(this.texture2, 0.5f, false, new Vector2(10f), Vector2.One, Vector2.One, false, LayerMovementDirection.None);
+            
+            TextureScene tScene = new TextureScene();
+            tScene.AddLayer(tLayer1);
+            tScene.AddLayer(tLayer2);
+            TextureComponent tComponent = new TextureComponent(this, tScene, baseScreenSize, resultionIndependent);
+
+            this.Components.Add(tComponent);
 
         }
 
@@ -234,6 +240,16 @@ namespace AzulEngine
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
+            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            //spriteBatch.Draw(texture,
+            //     Vector2.Zero,
+            //     null,
+            //     Color.White,
+            //     0, Vector2.Zero,
+            //     1.0f,
+            //     SpriteEffects.None,
+            //     0.0f);
+            //spriteBatch.End();
             base.Draw(gameTime);
         }
     }
