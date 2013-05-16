@@ -29,7 +29,7 @@ namespace AzulEngine
         TileScene scene;
         Vector2 backgrounScale = Vector2.One;
         Vector2 baseScreenSize;
-        const bool resultionIndependent = true;
+        const bool resultionIndependent = false;
         Camera2D camera; 
         public Game1()
             : base()
@@ -42,7 +42,7 @@ namespace AzulEngine
             baseScreenSize = new Vector2(dv.Width, dv.Height);
             graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 768;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();           
 
         }
@@ -84,7 +84,7 @@ namespace AzulEngine
                 }
             }
 
-            TileLayer layer1 = new TileLayer(cat1, map1, 0.5f, true, new Vector2(0, 0), new Vector2(1f, 1f), new Vector2(3f), false, LayerMovementDirection.None);
+            TileLayer layer1 = new TileLayer(cat1, map1, 0.5f, false, new Vector2(0, 0), new Vector2(1f, 1f), new Vector2(3f), false, LayerMovementDirection.None);
 
             texture2 = this.Content.Load<Texture2D>("tiles2");
 
@@ -97,7 +97,7 @@ namespace AzulEngine
                     map2.SetTile(i, j, new Tile(rand.Next(1, cat2.TilePositions.Count)));
                 }
             }
-            TileLayer layer2 = new TileLayer(cat2, map2, 1.0f, true, new Vector2(0, 0), new Vector2(1f, 1f), new Vector2(3f), true, LayerMovementDirection.Up);
+            TileLayer layer2 = new TileLayer(cat2, map2, 1.0f, false, new Vector2(0, 0), new Vector2(1f, 1f), new Vector2(3f), true, LayerMovementDirection.Up);
 
             scene = new TileScene();
             scene.AddLayer(layer2);
@@ -106,8 +106,8 @@ namespace AzulEngine
             TileComponent component = new TileComponent(this, scene, baseScreenSize, resultionIndependent);
             this.Components.Add(component);
 
-            TextureLayer tLayer1 = new TextureLayer(this.texture1, 1f, true, new Vector2(20f), Vector2.One, new Vector2(1.5f,1.5f), true, Anchor.LowerRight);
-            TextureLayer tLayer2 = new TextureLayer(this.texture2, 0.5f, true, new Vector2(10f), Vector2.One, Vector2.One, false, LayerMovementDirection.None);
+            TextureLayer tLayer1 = new TextureLayer(this.texture1, 1f, false, new Vector2(20f), Vector2.One, new Vector2(1.5f,1.5f), true, Anchor.LowerRight);
+            TextureLayer tLayer2 = new TextureLayer(this.texture2, 0.5f, true, new Vector2(10f), Vector2.One, new Vector2(5f), false, LayerMovementDirection.None);
             
             TextureScene tScene = new TextureScene();
             tScene.AddLayer(tLayer1);

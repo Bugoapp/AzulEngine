@@ -84,9 +84,7 @@ namespace AzulEngine.TextureEngine
                     {
                         TextureLayer currentLayer = layer;
                         this.CalculatePositionWithAnchor(currentLayer);
-                    }
-                    
-            
+                    }     
                 }
             }
         }
@@ -96,6 +94,9 @@ namespace AzulEngine.TextureEngine
             SpriteBatch spriteBatch = Game.Services.GetService(typeof(SpriteBatch)) as SpriteBatch;
             Vector3 screenScalingFactor;
             base.GetScreenScalingFactor(out screenScalingFactor);
+            Rectangle clientBounds;
+            base.GetClientBounds(out clientBounds);
+
             Matrix globalTransformation = Matrix.CreateScale(screenScalingFactor);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, globalTransformation);
 
@@ -103,15 +104,17 @@ namespace AzulEngine.TextureEngine
             {
                 if (layer.Visible)
                 {
-                    spriteBatch.Draw(layer.Texture,
-                                     layer.Position,
-                                     null,
-                                     Color.White * layer.Transparency,
-                                     0, Vector2.Zero,
-                                     Vector2.Multiply(camera.Zoom, layer.ZoomScale),
-                                     SpriteEffects.None,
-                                     0.0f);
-
+                    if (!this.IsTextureOutOfBounds(layer, clientBounds))
+                    {
+                        spriteBatch.Draw(layer.Texture,
+                                         layer.Position,
+                                         null,
+                                         Color.White * layer.Transparency,
+                                         0, Vector2.Zero,
+                                         Vector2.Multiply(camera.Zoom, layer.ZoomScale),
+                                         SpriteEffects.None,
+                                         0.0f);
+                    }
                 }
             }
             spriteBatch.End();
@@ -151,6 +154,27 @@ namespace AzulEngine.TextureEngine
             }
             layer.Position = new Vector2(xPosition,yPosition);
             
+        }
+
+        /// <summary>
+        /// Verifica si la textura esta fuera de los límites del cliente para no dibujarla
+        /// </summary>
+        /// <param name="layer">Capa de texturas</param>
+        /// <param name="clientBounds">Referencia a un rectángulo que contendrá los límites de la ventana cliente</param>
+        public Boolean IsTextureOutOfBounds(TextureLayer layer, Rectangle clientBounds)
+        {
+            if (layer.Position.X >= clientBounds.Width)
+            {
+                return true;
+            }
+            else if (layer.Position.Y >= clientBounds.Height)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

@@ -59,6 +59,18 @@ namespace AzulEngine.TextureEngine
             this.Anchor = Anchor.None;
         }
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TextureLayer que permite
+        /// crear una instancia completa con transparencia, visibilidad, posición,escala,velocidad, independencia de cámara y un anclaje de eje
+        /// </summary>
+        /// <param name="texture">Textura de la capa</param>
+        /// <param name="transparency">Transparencia de la capa</param>
+        /// <param name="visible">Visibilidad de la capa</param>
+        /// <param name="position">Posición de la capa</param>
+        /// <param name="zoomScale">Escala inicial de la capa</param>
+        /// <param name="velocity">Velocidad de desplazamiento de la capa</param>
+        /// <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
+        /// <param name="anchor">Anclaje de la textura</param>
         public TextureLayer(Texture2D texture, float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, bool cameraIndependent, Anchor anchor)
             : base(transparency, visible, position, zoomScale, velocity, cameraIndependent, LayerMovementDirection.None)
         {

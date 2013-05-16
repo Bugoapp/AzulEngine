@@ -12,6 +12,6 @@ D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Lidgren.Network.xml
 D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\Lidgren.Network.Windows.xml
 D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Release\GameEngine.exe
 D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Release\GameEngine.pdb
-D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\GameEngine.XML
-D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Release\GameEngine.csprojResolveAssemblyReference.cache
 D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\GameEngine.exe.config
+D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Release\GameEngine.csprojResolveAssemblyReference.cache
+D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Release\GameEngine.XML

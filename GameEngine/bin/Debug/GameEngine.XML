@@ -203,6 +203,20 @@
             <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
             <param name="direction">Dirección de desplazamiento de la capa cuando esta es independiente de la cámara</param>
         </member>
+        <member name="M:AzulEngine.TextureEngine.TextureLayer.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Single,System.Boolean,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,AzulEngine.EngineUtils.Anchor)">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TextureLayer que permite
+            crear una instancia completa con transparencia, visibilidad, posición,escala,velocidad, independencia de cámara y un anclaje de eje
+            </summary>
+            <param name="texture">Textura de la capa</param>
+            <param name="transparency">Transparencia de la capa</param>
+            <param name="visible">Visibilidad de la capa</param>
+            <param name="position">Posición de la capa</param>
+            <param name="zoomScale">Escala inicial de la capa</param>
+            <param name="velocity">Velocidad de desplazamiento de la capa</param>
+            <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
+            <param name="anchor">Anclaje de la textura</param>
+        </member>
         <member name="M:AzulEngine.TextureEngine.TextureLayer.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
             Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TextureLayer que permite
@@ -427,6 +441,13 @@
             </summary>
             <param name="layer">Capa de texturas</param>
         </member>
+        <member name="M:AzulEngine.TextureEngine.TextureComponent.IsTextureOutOfBounds(AzulEngine.TextureEngine.TextureLayer,Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Verifica si la textura esta fuera de los límites del cliente para no dibujarla
+            </summary>
+            <param name="layer">Capa de texturas</param>
+            <param name="clientBounds">Referencia a un rectángulo que contendrá los límites de la ventana cliente</param>
+        </member>
         <member name="T:AzulEngine.CameraEngine.Camera2D">
             <summary>
             Clase que representa una camara de juego
@@ -577,6 +598,36 @@
             Obtiene la textura que se utiliza para generar el catálogo
             </summary>
         </member>
+        <member name="T:AzulEngine.EngineUtils.Anchor">
+            <summary>
+            Enumeración que representa las anclas para los componentes de texturas
+            </summary>
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.None">
+            <summary>
+            Sin anclaje
+            </summary>  
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.UpperLeft">
+            <summary>
+            Anclado arriba y a la izquierda
+            </summary>        
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.UpperRight">
+            <summary>
+            Anclado arriba y a la derecha
+            </summary>  
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.LowerLeft">
+            <summary>
+            Anclado abajo y a la izquierda
+            </summary>  
+        </member>
+        <member name="F:AzulEngine.EngineUtils.Anchor.LowerRight">
+            <summary>
+            Anclado abajo y a la derecha
+            </summary>  
+        </member>
         <member name="T:AzulEngine.EngineUtils.LayerMovementDirection">
             <summary>
             Enumeración que Representa las direcciones de movimiento de una capa de baldosas
@@ -684,36 +735,6 @@
             <summary>
             Obtiene o establece el índice de la baldosa dentro de la categoría de baldosas.
             </summary>
-        </member>
-        <member name="T:AzulEngine.EngineUtils.Anchor">
-            <summary>
-            Enumeración que representa las anclas para los componentes de texturas
-            </summary>
-        </member>
-        <member name="F:AzulEngine.EngineUtils.Anchor.None">
-            <summary>
-            Sin anclaje
-            </summary>  
-        </member>
-        <member name="F:AzulEngine.EngineUtils.Anchor.UpperLeft">
-            <summary>
-            Anclado arriba y a la izquierda
-            </summary>        
-        </member>
-        <member name="F:AzulEngine.EngineUtils.Anchor.UpperRight">
-            <summary>
-            Anclado arriba y a la derecha
-            </summary>  
-        </member>
-        <member name="F:AzulEngine.EngineUtils.Anchor.LowerLeft">
-            <summary>
-            Anclado abajo y a la izquierda
-            </summary>  
-        </member>
-        <member name="F:AzulEngine.EngineUtils.Anchor.LowerRight">
-            <summary>
-            Anclado abajo y a la derecha
-            </summary>  
         </member>
     </members>
 </doc>
