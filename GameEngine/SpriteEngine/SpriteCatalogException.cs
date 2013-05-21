@@ -18,29 +18,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AzulEngine.EngineUtils;
 
-namespace AzulEngine.TextureEngine
+namespace AzulEngine.SpriteEngine
 {
     /// <summary>
-    /// Clase que representa una escena de texturas y que contiene varias capas a dibujar
+    /// Representa un error cuando se cargan texturas que tiene un tamaño que no coincide
+    /// con los tamaños del cuadro especificados
     /// </summary>
-    public class TextureScene : AbstractScene<TextureLayer>
+    public class SpriteCatalogException : Exception
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureScene que recibe
-        /// como parametros una colección de capas
+        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalogException
         /// </summary>
-        /// <param name="layers">Colección de capas de type AzulEngine.TextureEngine.TextureLayer</param>
-        public TextureScene(List<TextureLayer> layers)
-            :base(layers)
-        {}
-
-        /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureLayer que no recibe parametros
-        /// </summary>
-        public TextureScene()
-            : this(new List<TextureLayer>())
+        public SpriteCatalogException()
+            : base("El ancho y el alto seleccionados deben ser divisores del ancho y alto de la textura respectivamente")
         { }
 
     }

@@ -36,7 +36,7 @@ namespace AzulEngine.TextureEngine
         /// Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureComponent que recibe como
         /// parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.
         /// </summary>
-        /// <param name="game">Objeto tipo Game que representa el tipo principal del juego</param>
+        /// <param name="game">Objeto type Game que representa el type principal del juego</param>
         /// <param name="scene">Representa un conjunto de capas de baldosas</param>
         /// <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
         /// <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>

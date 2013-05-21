@@ -10,7 +10,7 @@ namespace AzulEngine.EngineUtils
     /// <summary>
     /// Representa un componente astracto
     /// </summary>
-    /// <typeparam name="T">Representa el tipo de la escena a utilizar</typeparam>
+    /// <typeparam name="T">Representa el type de la escena a utilizar</typeparam>
     public class AbstractComponent<T> : DrawableGameComponent
     {
         protected Camera2D camera;
@@ -49,7 +49,7 @@ namespace AzulEngine.EngineUtils
         /// Constructor de la clase abstracta AzulEngine.EngineUtils.AbstractComponent que recibe como
         /// parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.
         /// </summary>
-        /// <param name="game">Objeto tipo Game que representa el tipo principal del juego</param>
+        /// <param name="game">Objeto type Game que representa el type principal del juego</param>
         /// <param name="scene">Representa un conjunto de capas</param>
         /// <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
         /// <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>

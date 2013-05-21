@@ -29,3 +29,4 @@ D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Debug\Lidgren.Network.xml
 D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Debug\Lidgren.Network.Windows.xml
 D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Debug\GameEngine.XML
 D:\Programacion\Proyectos\AzulEngine\GameEngine\bin\Debug\GameEngine.exe.config
+D:\Programacion\Proyectos\AzulEngine\GameEngine\obj\x86\Debug\GameEngine.csprojResolveAssemblyReference.cache

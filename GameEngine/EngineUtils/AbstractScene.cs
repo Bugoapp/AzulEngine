@@ -24,7 +24,7 @@ namespace AzulEngine.EngineUtils
     /// <summary>
     /// Clase abstracta que representa una escena y que contiene varias capas a dibujar
     /// </summary>
-    /// <typeparam name="T">Representa el tipo de la capa a utilizar</typeparam>
+    /// <typeparam name="T">Representa el type de la capa a utilizar</typeparam>
     public class AbstractScene<T>
     {
 
@@ -41,7 +41,7 @@ namespace AzulEngine.EngineUtils
         /// Constructor de la clase abstracta AzulEngine.EngineUtils.AbstractScene que recibe
         /// como parametros una colección de capas
         /// </summary>
-        /// <param name="layers">Colección de capas de tipo T</param>
+        /// <param name="layers">Colección de capas de type T</param>
         public AbstractScene(List<T> layers)
         {
             this.layers = layers;
@@ -68,7 +68,7 @@ namespace AzulEngine.EngineUtils
         /// Metodo que obtiene una capa desde la colección de capas
         /// </summary>
         /// <param name="index">Indice de la capa a obtener</param>
-        /// <returns>Retorna una instancia de tipo T</returns>
+        /// <returns>Retorna una instancia de type T</returns>
         public T GetLayer(int index)
         {
             return this.layers[index];

@@ -16,20 +16,19 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace AzulEngine.TileEngine
+namespace AzulEngine.SpriteEngine
 {
-
     /// <summary>
-    /// Representa una catálogo de baldosas 
+    /// Representa una catálogo de cuadros (Frames) 
     /// </summary>
-    public class TileCatalog
+    public class SpriteCatalog
     {
         private Point size;
         /// <summary>
-        /// Obtiene o establece el tamaño de una baldosa individual
+        /// Obtiene o establece el tamaño de un cuadro individual
         /// </summary>
         public Point Size
         {
@@ -37,13 +36,13 @@ namespace AzulEngine.TileEngine
             set { size = value; }
         }
 
-        private Dictionary<int, Rectangle> tilePositions;
+        private Dictionary<int, Rectangle> framePositions;
         /// <summary>
-        /// Obtiene una colección de los rectángulos que prepresentan la posición de cada baldosa del catálogo
+        /// Obtiene una colección de los rectángulos que prepresentan la posición de cada cuadro del catálogo
         /// </summary>
-        public Dictionary<int, Rectangle> TilePositions
+        public Dictionary<int, Rectangle> FramePositions
         {
-            get { return tilePositions; }
+            get { return framePositions; }
         }
 
         private Texture2D texture;
@@ -55,67 +54,65 @@ namespace AzulEngine.TileEngine
             get { return texture; }
         }
 
-        /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileCatalog que recibe como
-        /// parametros la textura, el ancho y alto de la baldosa.
+                /// <summary>
+        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalog que recibe como
+        /// parametros la textura, el ancho y alto del cuadro.
         /// </summary>
         /// <param name="texture">Textura que define el catálogo</param>
-        /// <param name="width">Ancho de una baldosa</param>
-        /// <param name="height">Alto de una baldosa</param>
-        public TileCatalog(Texture2D texture, int width, int height)
+        /// <param name="width">Ancho de un cuadro</param>
+        /// <param name="height">Alto de un cuadro</param>
+        public SpriteCatalog(Texture2D texture, int width, int height)
         {
             this.texture = texture;
-            this.tilePositions = new Dictionary<int, Rectangle>();
-            CalculateTilePositions(texture, width, height, ref this.tilePositions);
+            this.framePositions = new Dictionary<int, Rectangle>();
+            CalculateTilePositions(texture, width, height, ref this.framePositions);
             this.Size = new Point(width, height);
         }
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileCatalog que recibe como
-        /// parametros la textura, una colección de rectángulos,el ancho y alto de la baldosa.
+        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalog que recibe como
+        /// parametros la textura, una colección de rectángulos,el ancho y alto del cuadro.
         /// </summary>
         /// <param name="texture">Textura que define el catálogo</param>
         /// <param name="width">Ancho de una baldosa</param>
         /// <param name="height">Alto de una baldosa</param>
-        public TileCatalog(Texture2D texture, Dictionary<int, Rectangle> tilePositions, int width, int height)
+        public SpriteCatalog(Texture2D texture, Dictionary<int, Rectangle> framePositions, int width, int height)
         {
             this.texture = texture;
-            this.tilePositions = tilePositions;
+            this.framePositions = framePositions;
             this.Size = new Point(width, height);
         }
-
         /// <summary>
-        /// Obtiene el rectángulo de la posicion de una baldosa dentro de la textura 
+        /// Obtiene el rectángulo de la posicion de un cuadro dentro de la textura 
         /// dada una referencia de la misma
         /// </summary>
         /// <param name="frame">Referencia de la baldosa de la que se obtendra la posición </param>
         /// <param name="framePosition">Valor de salida que contiene el rectángulo de posición</param>
-        public void GetTilePosition(ref Tile tile, out Rectangle tilePosition)
+        public void GetTilePosition(ref SpriteFrame frame, out Rectangle framePosition)
         {
-            tilePosition = TilePositions[tile.Index];
+            framePosition = FramePositions[frame.Index];
         }
 
 
         /// <summary>
-        /// Agrega o modifica una nuevo índice a la colección de rectángulos de posición de baldosas
+        /// Agrega o modifica una nuevo índice a la colección de rectángulos de posición de cuadros
         /// </summary>
-        /// <param name="index">Indice de la baldosa</param>
-        /// <param name="framePosition">Rectángulo que representa la posición de la baldosa</param>
-        public void AddTilePosition(int index, Rectangle tilePosition)
+        /// <param name="index">Indice del cuadro</param>
+        /// <param name="framePosition">Rectángulo que representa la posición del cuadro</param>
+        public void AddTilePosition(int index, Rectangle framePosition)
         {
-            this.TilePositions.Add(index, tilePosition);
+            this.FramePositions.Add(index, framePosition);
         }
 
-
         /// <summary>
-        /// Calcula las posiciones de las baldosas y las agrega dentro de la colecciones de rectángulos de posición, 
+        /// Calcula las posiciones de los cuadros y las agrega dentro de la colecciones de rectángulos de posición, 
         /// evitando crear la colección de manera manual.
         /// </summary>
         /// <param name="texture">Textura de la que se calculan los rectángulos de posición</param>
-        /// <param name="width">Ancho de la baldosa</param>
-        /// <param name="height">Alto de la baldosa</param>
+        /// <param name="width">Ancho del cuadro</param>
+        /// <param name="height">Alto del cuadro</param>
         /// <param name="framePositions">referencia de la colección de rectangulos de posición a devolver</param>
-        public static void CalculateTilePositions(Texture2D texture, int width, int height, ref Dictionary<int, Rectangle> tilePositions)
+        public static void CalculateTilePositions(Texture2D texture, int width, int height, ref Dictionary<int, Rectangle> framePositions)
         {
             //verificar si el ancho y alto son divisores del ancho y alto de las texturas
             if (texture.Width % width == 0 && texture.Height % height == 0)
@@ -129,13 +126,13 @@ namespace AzulEngine.TileEngine
                     for (int j = 0; j < liColumns; j++)
                     {
                         liPosition++;
-                        tilePositions.Add(liPosition, new Rectangle(j * width,i * height, width, height));
+                        framePositions.Add(liPosition, new Rectangle(j * width, i * height, width, height));
                     }
                 }
             }
             else
             {
-                throw new TileCatalogException();
+                throw new SpriteCatalogException();
             }
         }
     }

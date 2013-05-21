@@ -18,30 +18,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AzulEngine.EngineUtils;
 
-namespace AzulEngine.TextureEngine
+namespace AzulEngine.SpriteEngine
 {
     /// <summary>
-    /// Clase que representa una escena de texturas y que contiene varias capas a dibujar
+    /// Clase que representa una cuadro de un frame
     /// </summary>
-    public class TextureScene : AbstractScene<TextureLayer>
+    public class SpriteFrame
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureScene que recibe
-        /// como parametros una colección de capas
+        /// Obtiene o establece el índice del cuadro dentro de la categoría de sprites.
         /// </summary>
-        /// <param name="layers">Colección de capas de type AzulEngine.TextureEngine.TextureLayer</param>
-        public TextureScene(List<TextureLayer> layers)
-            :base(layers)
-        {}
+        public Int32 Index { get; set; }
+
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureLayer que no recibe parametros
+        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteFrame
+        /// con el patrón especificado que indica el índice del cuadro.
         /// </summary>
-        public TextureScene()
-            : this(new List<TextureLayer>())
-        { }
-
+        /// <param name="type">Provides a snapshot of timing values.</param>
+        public SpriteFrame(Int32 type)
+        {
+            this.Index = type;
+        }
     }
 }
