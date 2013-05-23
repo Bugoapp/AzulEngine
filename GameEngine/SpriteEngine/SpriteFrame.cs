@@ -16,8 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AzulEngine.SpriteEngine
 {
@@ -30,7 +28,6 @@ namespace AzulEngine.SpriteEngine
         /// Obtiene o establece el índice del cuadro dentro de la categoría de sprites.
         /// </summary>
         public Int32 Index { get; set; }
-
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteFrame

@@ -16,8 +16,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace AzulEngine.SpriteEngine
 {
@@ -26,6 +25,15 @@ namespace AzulEngine.SpriteEngine
     /// </summary>
     public class SpriteSequence
     {
+        private int currentFrame;
+        /// <summary>
+        /// Obtiene el índice con base cero del cuadro actual que se dibujará
+        /// </summary>
+        public int CurrentPosition
+        {
+            get { return currentFrame; }
+        }
+
         private int stepTime;
         /// <summary>
         /// Obtiene o establece la duración en milisegundos de cada fotograma en la secuencia.
@@ -51,8 +59,11 @@ namespace AzulEngine.SpriteEngine
         /// el largo de la secuencia
         /// </summary>
         /// <param name="lenght">largo de la secuencia</param>
-        public SpriteSequence(int lenght)
+        /// <param name="currentFrame">Indice con base cero de cuadro actual a dibujar</param>
+        public SpriteSequence(int lenght, int currentFrame)
         {
+            this.currentFrame = (int)MathHelper.Clamp(currentFrame, 0, lenght);
+
             this.sequence = new SpriteFrame[lenght];
             for (int i = 0; i < lenght; i++)
             {
@@ -65,8 +76,10 @@ namespace AzulEngine.SpriteEngine
         /// una arreglo de tipo SpriteFrame conteniendo la secuencia de sprites
         /// </summary>
         /// <param name="sequence">Secuencia de cuadros del sprite</param>
-        public SpriteSequence(SpriteFrame[] sequence)
+        /// <param name="currentFrame">Indice con base cero de cuadro actual a dibujar</param>
+        public SpriteSequence(SpriteFrame[] sequence, int currentFrame)
         {
+            this.currentFrame = (int)MathHelper.Clamp(currentFrame, 0, sequence.Length);
             this.sequence = sequence;
         }
 
@@ -75,7 +88,7 @@ namespace AzulEngine.SpriteEngine
         /// </summary>
         /// <param name="position">Posición del cuadro dentro de la colección de cuadros</param>
         /// <param name="frame">Cuadro a insertar dentro de la colección</param>
-        public void SetTile(int position,SpriteFrame frame)
+        public void SetTile(int position, SpriteFrame frame)
         {
             this.sequence[position] = frame;
         }
@@ -89,5 +102,24 @@ namespace AzulEngine.SpriteEngine
         {
             return this.sequence[position];
         }
+
+        /// <summary>
+        /// Método que obtiene el índice del cuadro actual de la secuencia sumándole al mismo tiempo un 1.
+        /// </summary>
+        /// <returns>Retorna el cuadro actual despues de sumarle 1</returns>
+        public int NextFrameIndex()
+        {
+
+            if (this.sequence.Length < this.currentFrame)
+            {
+                return this.currentFrame++;
+            }
+            else
+            {
+                return this.currentFrame = 0;
+            }
+
+        }
+
     }
 }

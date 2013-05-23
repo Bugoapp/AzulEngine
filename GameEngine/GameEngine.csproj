@@ -65,9 +65,12 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpriteEngine\SpriteLayer.cs" />
     <Compile Include="SpriteEngine\SpriteCatalog.cs" />
     <Compile Include="SpriteEngine\SpriteCatalogException.cs" />
+    <Compile Include="SpriteEngine\SpriteComponent.cs" />
     <Compile Include="SpriteEngine\SpriteFrame.cs" />
+    <Compile Include="SpriteEngine\SpriteScene.cs" />
     <Compile Include="SpriteEngine\SpriteSequence.cs" />
     <Compile Include="TextureEngine\TextureComponent.cs" />
     <Compile Include="TextureEngine\TextureLayer.cs" />

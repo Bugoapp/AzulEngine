@@ -45,6 +45,7 @@ namespace AzulEngine.EngineUtils
         /// Obtiene o establece si la resolución interna es independiente de la resolución del sistema
         /// </summary>
         public virtual Boolean ResultionIndependent { get; set; }
+
         /// <summary>
         /// Constructor de la clase abstracta AzulEngine.EngineUtils.AbstractComponent que recibe como
         /// parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.

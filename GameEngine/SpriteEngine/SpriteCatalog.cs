@@ -54,7 +54,7 @@ namespace AzulEngine.SpriteEngine
             get { return texture; }
         }
 
-                /// <summary>
+        /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalog que recibe como
         /// parametros la textura, el ancho y alto del cuadro.
         /// </summary>
@@ -65,7 +65,7 @@ namespace AzulEngine.SpriteEngine
         {
             this.texture = texture;
             this.framePositions = new Dictionary<int, Rectangle>();
-            CalculateTilePositions(texture, width, height, ref this.framePositions);
+            CalculateFrames(texture, width, height, ref this.framePositions);
             this.Size = new Point(width, height);
         }
 
@@ -82,6 +82,7 @@ namespace AzulEngine.SpriteEngine
             this.framePositions = framePositions;
             this.Size = new Point(width, height);
         }
+
         /// <summary>
         /// Obtiene el rectángulo de la posicion de un cuadro dentro de la textura 
         /// dada una referencia de la misma
@@ -92,7 +93,6 @@ namespace AzulEngine.SpriteEngine
         {
             framePosition = FramePositions[frame.Index];
         }
-
 
         /// <summary>
         /// Agrega o modifica una nuevo índice a la colección de rectángulos de posición de cuadros
@@ -112,7 +112,7 @@ namespace AzulEngine.SpriteEngine
         /// <param name="width">Ancho del cuadro</param>
         /// <param name="height">Alto del cuadro</param>
         /// <param name="framePositions">referencia de la colección de rectangulos de posición a devolver</param>
-        public static void CalculateTilePositions(Texture2D texture, int width, int height, ref Dictionary<int, Rectangle> framePositions)
+        public static void CalculateFrames(Texture2D texture, int width, int height, ref Dictionary<int, Rectangle> framePositions)
         {
             //verificar si el ancho y alto son divisores del ancho y alto de las texturas
             if (texture.Width % width == 0 && texture.Height % height == 0)

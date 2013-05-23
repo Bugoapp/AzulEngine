@@ -38,9 +38,9 @@ namespace AzulEngine.TileEngine
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileLayer que permite
-        /// crear una instancia completa con transparencia, visibilidad, posición,escala,velocidad, independencia de cámara y dirección de movimiento
+        /// crear una instancia completa con transparencia, visibilidad, posición, escala, velocidad, independencia de cámara y dirección de movimiento
         /// </summary>
-        /// <param name="tileCatalog">Cátalogo de baldosas</param>
+        /// <param name="tileCatalog">Catálogo de baldosas</param>
         /// <param name="tileMap">Mapa de baldosas</param>
         /// <param name="transparency">Transparencia de la capa</param>
         /// <param name="visible">Visibilidad de la capa</param>
@@ -49,7 +49,7 @@ namespace AzulEngine.TileEngine
         /// <param name="velocity">Velocidad de desplazamiento de la capa</param>
         /// <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
         /// <param name="direction">Dirección de desplazamiento de la capa cuando esta es independiente de la cámara</param>
-        public TileLayer(TileCatalog tileCatalog, TileMap tileMap,float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, bool cameraIndependent, LayerMovementDirection direction)
+        public TileLayer(TileCatalog tileCatalog, TileMap tileMap, float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, bool cameraIndependent, LayerMovementDirection direction)
             : base(transparency, visible, position, zoomScale, velocity, cameraIndependent, direction)
         {
             this.TileCatalog = tileCatalog;
@@ -104,7 +104,6 @@ namespace AzulEngine.TileEngine
             }
         }
         
-
         /// <summary>
         /// Obtiene el Tamaño de la capa con escala aplicada
         /// </summary>

@@ -305,9 +305,9 @@
         <member name="M:AzulEngine.TileEngine.TileLayer.#ctor(AzulEngine.TileEngine.TileCatalog,AzulEngine.TileEngine.TileMap,System.Single,System.Boolean,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,AzulEngine.EngineUtils.LayerMovementDirection)">
             <summary>
             Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileLayer que permite
-            crear una instancia completa con transparencia, visibilidad, posición,escala,velocidad, independencia de cámara y dirección de movimiento
+            crear una instancia completa con transparencia, visibilidad, posición, escala, velocidad, independencia de cámara y dirección de movimiento
             </summary>
-            <param name="tileCatalog">Cátalogo de baldosas</param>
+            <param name="tileCatalog">Catálogo de baldosas</param>
             <param name="tileMap">Mapa de baldosas</param>
             <param name="transparency">Transparencia de la capa</param>
             <param name="visible">Visibilidad de la capa</param>
@@ -484,6 +484,73 @@
         <member name="P:AzulEngine.CameraEngine.Camera2D.Zoom">
             <summary>
             Obtiene o establece el zoom de la cámara
+            </summary>
+        </member>
+        <member name="T:AzulEngine.SpriteEngine.SpriteSequence">
+            <summary>
+            Clase que representa una secuencias de cuadros
+            </summary>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteSequence que recibe
+            el largo de la secuencia
+            </summary>
+            <param name="lenght">largo de la secuencia</param>
+            <param name="currentFrame">Indice con base cero de cuadro actual a dibujar</param>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.#ctor(AzulEngine.SpriteEngine.SpriteFrame[],System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteSequence que recibe
+            una arreglo de tipo SpriteFrame conteniendo la secuencia de sprites
+            </summary>
+            <param name="sequence">Secuencia de cuadros del sprite</param>
+            <param name="currentFrame">Indice con base cero de cuadro actual a dibujar</param>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.SetTile(System.Int32,AzulEngine.SpriteEngine.SpriteFrame)">
+            <summary>
+            Metodo que establece un cuadro dentro de la colección de cuadros
+            </summary>
+            <param name="position">Posición del cuadro dentro de la colección de cuadros</param>
+            <param name="frame">Cuadro a insertar dentro de la colección</param>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.GetTile(System.Int32)">
+            <summary>
+            Metodo que obtiene un cuadro dentro de la colección de cuadros
+            </summary>
+            <param name="position">Posición del cuadro dentro de la colección de cuadros</param>
+            <returns>Retorna una instancia de type AzulEngine.SpriteEngine.SpriteFrame</returns>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.NextFrameIndex">
+            <summary>
+            Método que obtiene el índice del cuadro actual de la secuencia sumándole al mismo tiempo un 1.
+            </summary>
+            <returns>Retorna el cuadro actual despues de sumarle 1</returns>
+        </member>
+        <member name="P:AzulEngine.SpriteEngine.SpriteSequence.CurrentPosition">
+            <summary>
+            Obtiene el índice con base cero de cuadro actual a dibujar
+            </summary>
+        </member>
+        <member name="P:AzulEngine.SpriteEngine.SpriteSequence.StepTime">
+            <summary>
+            Obtiene o establece la duración en milisegundos de cada fotograma en la secuencia.
+            </summary>
+        </member>
+        <member name="P:AzulEngine.SpriteEngine.SpriteSequence.Sequence">
+            <summary>
+            Obtiene o establece la secuencia de fotogramas
+            </summary>
+        </member>
+        <member name="T:AzulEngine.SpriteEngine.SpriteCatalogException">
+            <summary>
+            Representa un error cuando se cargan texturas que tiene un tamaño que no coincide
+            con los tamaños del cuadro especificados
+            </summary>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteCatalogException.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalogException
             </summary>
         </member>
         <member name="T:AzulEngine.Game1">
@@ -679,6 +746,86 @@
             Movimiento hacia la abajo y la derecha
             </summary>
         </member>
+        <member name="T:AzulEngine.SpriteEngine.SpriteFrame">
+            <summary>
+            Clase que representa una cuadro de un frame
+            </summary>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteFrame.#ctor(System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteFrame
+            con el patrón especificado que indica el índice del cuadro.
+            </summary>
+            <param name="type">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="P:AzulEngine.SpriteEngine.SpriteFrame.Index">
+            <summary>
+            Obtiene o establece el índice del cuadro dentro de la categoría de sprites.
+            </summary>
+        </member>
+        <member name="T:AzulEngine.SpriteEngine.SpriteCatalog">
+            <summary>
+            Representa una catálogo de cuadros (Frames) 
+            </summary>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalog que recibe como
+            parametros la textura, el ancho y alto del cuadro.
+            </summary>
+            <param name="texture">Textura que define el catálogo</param>
+            <param name="width">Ancho de un cuadro</param>
+            <param name="height">Alto de un cuadro</param>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Collections.Generic.Dictionary{System.Int32,Microsoft.Xna.Framework.Rectangle},System.Int32,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalog que recibe como
+            parametros la textura, una colección de rectángulos,el ancho y alto del cuadro.
+            </summary>
+            <param name="texture">Textura que define el catálogo</param>
+            <param name="width">Ancho de una baldosa</param>
+            <param name="height">Alto de una baldosa</param>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.GetTilePosition(AzulEngine.SpriteEngine.SpriteFrame@,Microsoft.Xna.Framework.Rectangle@)">
+            <summary>
+            Obtiene el rectángulo de la posicion de un cuadro dentro de la textura 
+            dada una referencia de la misma
+            </summary>
+            <param name="frame">Referencia de la baldosa de la que se obtendra la posición </param>
+            <param name="framePosition">Valor de salida que contiene el rectángulo de posición</param>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.AddTilePosition(System.Int32,Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Agrega o modifica una nuevo índice a la colección de rectángulos de posición de cuadros
+            </summary>
+            <param name="index">Indice del cuadro</param>
+            <param name="framePosition">Rectángulo que representa la posición del cuadro</param>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.CalculateFrames(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.Int32,Microsoft.Xna.Framework.Rectangle}@)">
+            <summary>
+            Calcula las posiciones de los cuadros y las agrega dentro de la colecciones de rectángulos de posición, 
+            evitando crear la colección de manera manual.
+            </summary>
+            <param name="texture">Textura de la que se calculan los rectángulos de posición</param>
+            <param name="width">Ancho del cuadro</param>
+            <param name="height">Alto del cuadro</param>
+            <param name="framePositions">referencia de la colección de rectangulos de posición a devolver</param>
+        </member>
+        <member name="P:AzulEngine.SpriteEngine.SpriteCatalog.Size">
+            <summary>
+            Obtiene o establece el tamaño de un cuadro individual
+            </summary>
+        </member>
+        <member name="P:AzulEngine.SpriteEngine.SpriteCatalog.FramePositions">
+            <summary>
+            Obtiene una colección de los rectángulos que prepresentan la posición de cada cuadro del catálogo
+            </summary>
+        </member>
+        <member name="P:AzulEngine.SpriteEngine.SpriteCatalog.Texture">
+            <summary>
+            Obtiene la textura que se utiliza para generar el catálogo
+            </summary>
+        </member>
         <member name="T:AzulEngine.TileEngine.TileDrawLimits">
             <summary>
             Clase que representa los limites de una capa de baldosas a dibujar
@@ -736,138 +883,84 @@
             Obtiene o establece el índice de la baldosa dentro de la categoría de baldosas.
             </summary>
         </member>
-        <member name="T:AzulEngine.SpriteEngine.SpriteCatalog">
+        <member name="P:AzulEngine.SpriteEngine.SpriteComponent.Camera">
             <summary>
-            Representa una catálogo de cuadros (Frames) 
+            Obtiene la cámara de visualización
             </summary>
         </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32)">
+        <member name="P:AzulEngine.SpriteEngine.SpriteComponent.BaseScreenSize">
             <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalog que recibe como
-            parametros la textura, el ancho y alto del cuadro.
-            </summary>
-            <param name="texture">Textura que define el catálogo</param>
-            <param name="width">Ancho de un cuadro</param>
-            <param name="height">Alto de un cuadro</param>
-        </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Collections.Generic.Dictionary{System.Int32,Microsoft.Xna.Framework.Rectangle},System.Int32,System.Int32)">
-            <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalog que recibe como
-            parametros la textura, una colección de rectángulos,el ancho y alto del cuadro.
-            </summary>
-            <param name="texture">Textura que define el catálogo</param>
-            <param name="width">Ancho de una baldosa</param>
-            <param name="height">Alto de una baldosa</param>
-        </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.GetTilePosition(AzulEngine.SpriteEngine.SpriteFrame@,Microsoft.Xna.Framework.Rectangle@)">
-            <summary>
-            Obtiene el rectángulo de la posicion de un cuadro dentro de la textura 
-            dada una referencia de la misma
-            </summary>
-            <param name="frame">Referencia de la baldosa de la que se obtendra la posición </param>
-            <param name="framePosition">Valor de salida que contiene el rectángulo de posición</param>
-        </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.AddTilePosition(System.Int32,Microsoft.Xna.Framework.Rectangle)">
-            <summary>
-            Agrega o modifica una nuevo índice a la colección de rectángulos de posición de cuadros
-            </summary>
-            <param name="index">Indice del cuadro</param>
-            <param name="framePosition">Rectángulo que representa la posición del cuadro</param>
-        </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteCatalog.CalculateTilePositions(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.Int32,Microsoft.Xna.Framework.Rectangle}@)">
-            <summary>
-            Calcula las posiciones de los cuadros y las agrega dentro de la colecciones de rectángulos de posición, 
-            evitando crear la colección de manera manual.
-            </summary>
-            <param name="texture">Textura de la que se calculan los rectángulos de posición</param>
-            <param name="width">Ancho del cuadro</param>
-            <param name="height">Alto del cuadro</param>
-            <param name="framePositions">referencia de la colección de rectangulos de posición a devolver</param>
-        </member>
-        <member name="P:AzulEngine.SpriteEngine.SpriteCatalog.Size">
-            <summary>
-            Obtiene o establece el tamaño de un cuadro individual
+            Obtiene o establece la resolución base en un sistema de resolución independiente
             </summary>
         </member>
-        <member name="P:AzulEngine.SpriteEngine.SpriteCatalog.FramePositions">
+        <member name="P:AzulEngine.SpriteEngine.SpriteComponent.ResultionIndependent">
             <summary>
-            Obtiene una colección de los rectángulos que prepresentan la posición de cada cuadro del catálogo
+            Obtiene o establece si la resolución interna es independiente de la resolución del sistema
             </summary>
         </member>
-        <member name="P:AzulEngine.SpriteEngine.SpriteCatalog.Texture">
+        <member name="T:AzulEngine.SpriteEngine.SpriteLayer">
             <summary>
-            Obtiene la textura que se utiliza para generar el catálogo
+            Clase que representa una capa compuesta de varias secuencias de sprites
             </summary>
         </member>
-        <member name="T:AzulEngine.SpriteEngine.SpriteFrame">
+        <member name="M:AzulEngine.SpriteEngine.SpriteLayer.#ctor(AzulEngine.SpriteEngine.SpriteCatalog,AzulEngine.SpriteEngine.SpriteSequence[],System.Single,System.Boolean,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,AzulEngine.EngineUtils.LayerMovementDirection)">
             <summary>
-            Clase que representa una cuadro de un frame
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteLayer que permite
+            crear una instancia completa con transparencia, visibilidad, posición,escala,velocidad, independencia de cámara y dirección de movimiento
+            </summary>
+            <param name="spriteCatalog">Catálogo de cuadros</param>
+            <param name="spriteSecuence">Colección de secuencia de cuadros</param>
+            <param name="transparency">Transparencia de la capa</param>
+            <param name="visible">Visibilidad de la capa</param>
+            <param name="position">Posición de la capa</param>
+            <param name="zoomScale">Escala inicial de la capa</param>
+            <param name="velocity">Velocidad de desplazamiento de la capa</param>
+            <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
+            <param name="direction">Dirección de desplazamiento de la capa cuando esta es independiente de la cámara</param>
+        </member>
+        <member name="M:AzulEngine.SpriteEngine.SpriteLayer.#ctor(AzulEngine.SpriteEngine.SpriteCatalog,AzulEngine.SpriteEngine.SpriteSequence[])">
+            <summary>
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteLayer que permite
+            crear una instancia solo con un cátalogo y una colección de secuencias
+            </summary>
+            <param name="spriteCatalog">Cátalogo de cuadros </param>
+            <param name="spriteSecuence">Secuencia de cuadros</param>
+        </member>
+        <member name="P:AzulEngine.SpriteEngine.SpriteLayer.SpriteCatalog">
+            <summary>
+            Obtiene o establece el catálogo de sprites
             </summary>
         </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteFrame.#ctor(System.Int32)">
+        <member name="P:AzulEngine.SpriteEngine.SpriteLayer.SpriteSecuence">
             <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteFrame
-            con el patrón especificado que indica el índice del cuadro.
-            </summary>
-            <param name="type">Provides a snapshot of timing values.</param>
-        </member>
-        <member name="P:AzulEngine.SpriteEngine.SpriteFrame.Index">
-            <summary>
-            Obtiene o establece el índice del cuadro dentro de la categoría de sprites.
+            Obtiene o establece una colección de secuencias de cuadros
             </summary>
         </member>
-        <member name="T:AzulEngine.SpriteEngine.SpriteCatalogException">
+        <member name="P:AzulEngine.SpriteEngine.SpriteLayer.Size">
             <summary>
-            Representa un error cuando se cargan texturas que tiene un tamaño que no coincide
-            con los tamaños del cuadro especificados
+            Obtiene el Tamaño de la capa
             </summary>
         </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteCatalogException.#ctor">
+        <member name="P:AzulEngine.SpriteEngine.SpriteLayer.ScaledSize">
             <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteCatalogException
+            Obtiene el Tamaño de la capa con escala aplicada
             </summary>
         </member>
-        <member name="T:AzulEngine.SpriteEngine.SpriteSequence">
+        <member name="T:AzulEngine.SpriteEngine.SpriteScene">
             <summary>
-            Clase que representa una secuencias de cuadros
+            Clase que representa una escena de sprites y que contiene varias capas a dibujar
             </summary>
         </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.#ctor(System.Int32)">
+        <member name="M:AzulEngine.SpriteEngine.SpriteScene.#ctor(System.Collections.Generic.List{AzulEngine.SpriteEngine.SpriteLayer})">
             <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteSequence que recibe
-            el largo de la secuencia
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteScene que recibe
+            como parametros una colección de capas
             </summary>
-            <param name="lenght">largo de la secuencia</param>
+            <param name="layers">Colección de capas de type AzulEngine.SpriteEngine.SpriteLayer</param>
         </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.#ctor(AzulEngine.SpriteEngine.SpriteFrame[])">
+        <member name="M:AzulEngine.SpriteEngine.SpriteScene.#ctor">
             <summary>
-            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteSequence que recibe
-            una arreglo de tipo SpriteFrame conteniendo la secuencia de sprites
-            </summary>
-            <param name="sequence">Secuencia de cuadros del sprite</param>
-        </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.SetTile(System.Int32,AzulEngine.SpriteEngine.SpriteFrame)">
-            <summary>
-            Metodo que establece un cuadro dentro de la colección de cuadros
-            </summary>
-            <param name="position">Posición del cuadro dentro de la colección de cuadros</param>
-            <param name="frame">Cuadro a insertar dentro de la colección</param>
-        </member>
-        <member name="M:AzulEngine.SpriteEngine.SpriteSequence.GetTile(System.Int32)">
-            <summary>
-            Metodo que obtiene un cuadro dentro de la colección de cuadros
-            </summary>
-            <param name="position">Posición del cuadro dentro de la colección de cuadros</param>
-            <returns>Retorna una instancia de type AzulEngine.SpriteEngine.SpriteFrame</returns>
-        </member>
-        <member name="P:AzulEngine.SpriteEngine.SpriteSequence.StepTime">
-            <summary>
-            Obtiene o establece la duración en milisegundos de cada fotograma en la secuencia.
-            </summary>
-        </member>
-        <member name="P:AzulEngine.SpriteEngine.SpriteSequence.Sequence">
-            <summary>
-            Obtiene o establece la secuencia de fotogramas
+            Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteScene  que no recibe parametros
             </summary>
         </member>
     </members>
