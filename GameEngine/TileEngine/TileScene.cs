@@ -29,7 +29,7 @@ namespace AzulEngine.TileEngine
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileScene que recibe
         /// como parametros una colección de capas
         /// </summary>
-        /// <param name="layers">Colección de capas de type AzulEngine.TileEngine.TileLayer</param>
+        /// <param name="layers">Colección de capas de index AzulEngine.TileEngine.TileLayer</param>
         public TileScene(List<TileLayer> layers)
             :base(layers)
         { }

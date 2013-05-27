@@ -33,10 +33,10 @@ namespace AzulEngine.TileEngine
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.Tile 
         /// con el patrón especificado que indica el índice de la baldosa.
         /// </summary>
-        /// <param name="type">Provides a snapshot of timing values.</param>
-        public Tile(Int32 type)
+        /// <param name="index">Indice de la baldosa que apunta a un elemento dentro del catálogo</param>
+        public Tile(Int32 index)
         {
-            this.Index = type;
+            this.Index = index;
         }
     }
 }

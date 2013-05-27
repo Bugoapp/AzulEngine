@@ -55,7 +55,7 @@ namespace AzulEngine.SpriteEngine
         }
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteSequence que recibe
+        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteSequences que recibe
         /// el largo de la secuencia
         /// </summary>
         /// <param name="lenght">largo de la secuencia</param>
@@ -72,7 +72,7 @@ namespace AzulEngine.SpriteEngine
         }
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteSequence que recibe
+        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteSequences que recibe
         /// una arreglo de tipo SpriteFrame conteniendo la secuencia de sprites
         /// </summary>
         /// <param name="sequence">Secuencia de cuadros del sprite</param>
@@ -88,7 +88,7 @@ namespace AzulEngine.SpriteEngine
         /// </summary>
         /// <param name="position">Posición del cuadro dentro de la colección de cuadros</param>
         /// <param name="frame">Cuadro a insertar dentro de la colección</param>
-        public void SetTile(int position, SpriteFrame frame)
+        public void SetFrame(int position, SpriteFrame frame)
         {
             this.sequence[position] = frame;
         }
@@ -97,28 +97,19 @@ namespace AzulEngine.SpriteEngine
         /// Metodo que obtiene un cuadro dentro de la colección de cuadros
         /// </summary>
         /// <param name="position">Posición del cuadro dentro de la colección de cuadros</param>
-        /// <returns>Retorna una instancia de type AzulEngine.SpriteEngine.SpriteFrame</returns>
-        public SpriteFrame GetTile(int position)
+        /// <returns>Retorna una instancia de index AzulEngine.SpriteEngine.SpriteFrame</returns>
+        public SpriteFrame GetFrame(int position)
         {
             return this.sequence[position];
         }
 
         /// <summary>
-        /// Método que obtiene el índice del cuadro actual de la secuencia sumándole al mismo tiempo un 1.
+        /// Método que obtiene el índice del cuadro siguiente.
         /// </summary>
-        /// <returns>Retorna el cuadro actual despues de sumarle 1</returns>
-        public int NextFrameIndex()
+        /// <returns>Retorna un entero que indica el indice del cuadro siguiente dentro de la secuencia</returns>
+        public int NextFrame()
         {
-
-            if (this.sequence.Length < this.currentFrame)
-            {
-                return this.currentFrame++;
-            }
-            else
-            {
-                return this.currentFrame = 0;
-            }
-
+            return this.currentFrame = ++this.currentFrame % this.sequence.Length;
         }
 
     }

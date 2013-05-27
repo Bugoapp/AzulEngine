@@ -15,7 +15,7 @@ namespace AzulEngine.SpriteEngine
         /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteScene que recibe
         /// como parametros una colección de capas
         /// </summary>
-        /// <param name="layers">Colección de capas de type AzulEngine.SpriteEngine.SpriteLayer</param>
+        /// <param name="layers">Colección de capas de index AzulEngine.SpriteEngine.SpriteLayer</param>
         public SpriteScene(List<SpriteLayer> layers)
             :base(layers)
         { }

@@ -74,6 +74,7 @@ namespace AzulEngine.SpriteEngine
         /// parametros la textura, una colección de rectángulos,el ancho y alto del cuadro.
         /// </summary>
         /// <param name="texture">Textura que define el catálogo</param>
+        /// <param name="framePositions">Diccionario que almacena el rectángulo de posición de cada cuadro</param>
         /// <param name="width">Ancho de una baldosa</param>
         /// <param name="height">Alto de una baldosa</param>
         public SpriteCatalog(Texture2D texture, Dictionary<int, Rectangle> framePositions, int width, int height)
@@ -89,7 +90,7 @@ namespace AzulEngine.SpriteEngine
         /// </summary>
         /// <param name="frame">Referencia de la baldosa de la que se obtendra la posición </param>
         /// <param name="framePosition">Valor de salida que contiene el rectángulo de posición</param>
-        public void GetTilePosition(ref SpriteFrame frame, out Rectangle framePosition)
+        public void GetFramePosition(SpriteFrame frame, out Rectangle framePosition)
         {
             framePosition = FramePositions[frame.Index];
         }
@@ -99,7 +100,7 @@ namespace AzulEngine.SpriteEngine
         /// </summary>
         /// <param name="index">Indice del cuadro</param>
         /// <param name="framePosition">Rectángulo que representa la posición del cuadro</param>
-        public void AddTilePosition(int index, Rectangle framePosition)
+        public void AddFramePosition(int index, Rectangle framePosition)
         {
             this.FramePositions.Add(index, framePosition);
         }

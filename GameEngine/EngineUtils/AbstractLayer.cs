@@ -25,7 +25,7 @@ namespace AzulEngine.EngineUtils
     /// <summary>
     /// Clase abstracta que representa una capa
     /// </summary>
-    public abstract class AbstractLayer
+    public abstract class AbstractLayer : IGameElement
     {
         /// <summary>
         /// Obtiene o establece la visibilidad de la capa

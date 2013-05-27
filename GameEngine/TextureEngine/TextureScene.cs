@@ -31,7 +31,7 @@ namespace AzulEngine.TextureEngine
         /// Inicializa una nueva instancia de la clase AzulEngine.TextureEngine.TextureScene que recibe
         /// como parametros una colección de capas
         /// </summary>
-        /// <param name="layers">Colección de capas de type AzulEngine.TextureEngine.TextureLayer</param>
+        /// <param name="layers">Colección de capas de index AzulEngine.TextureEngine.TextureLayer</param>
         public TextureScene(List<TextureLayer> layers)
             :base(layers)
         {}

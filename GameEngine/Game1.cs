@@ -11,13 +11,14 @@ using AzulEngine.TileEngine;
 using AzulEngine.CameraEngine;
 using AzulEngine.EngineUtils;
 using AzulEngine.TextureEngine;
+using AzulEngine.SpriteEngine;
 
 #endregion
 
 namespace AzulEngine
 {
     /// <summary>
-    /// This is the main type for your game
+    /// This is the main index for your game
     /// </summary>
     public class Game1 : Game
     {
@@ -40,10 +41,10 @@ namespace AzulEngine
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             baseScreenSize = new Vector2(dv.Width, dv.Height);
-            graphics.PreferredBackBufferWidth = 1024;
-            graphics.PreferredBackBufferHeight = 768;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
             graphics.IsFullScreen = false;
-            graphics.ApplyChanges();           
+            graphics.ApplyChanges();
 
         }
 
@@ -66,7 +67,7 @@ namespace AzulEngine
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            camera = new Camera2D(new Vector2(0f, 0f), new Vector2(1f), new Vector2(1f));
+            camera = new Camera2D(new Vector2(0f, 0f), new Vector2(1f), new Vector2(3f));
 
             this.Services.AddService(typeof(SpriteBatch), spriteBatch);
             this.Services.AddService(typeof(Camera2D), camera);
@@ -107,14 +108,52 @@ namespace AzulEngine
             this.Components.Add(component);
 
             TextureLayer tLayer1 = new TextureLayer(this.texture1, 1f, false, new Vector2(20f), Vector2.One, new Vector2(1.5f,1.5f), true, Anchor.LowerRight);
-            TextureLayer tLayer2 = new TextureLayer(this.texture2, 0.5f, true, new Vector2(10f), Vector2.One, new Vector2(5f), false, LayerMovementDirection.None);
+            TextureLayer tLayer2 = new TextureLayer(this.texture2, 0.5f, false, new Vector2(10f), Vector2.One, new Vector2(5f), true, Anchor.LowerLeft);
             
             TextureScene tScene = new TextureScene();
             tScene.AddLayer(tLayer1);
             tScene.AddLayer(tLayer2);
-            TextureComponent tComponent = new TextureComponent(this, tScene, baseScreenSize, resultionIndependent);
-
+            TextureComponent tComponent = new TextureComponent(this, tScene, baseScreenSize, resultionIndependent);          
             this.Components.Add(tComponent);
+
+            texture1 = this.Content.Load<Texture2D>("megax");
+            SpriteCatalog scatalog = new SpriteCatalog(texture1, 36, 42);
+
+            SpriteSequence[] spriteSecuences = new SpriteSequence[2];
+
+            SpriteSequence spriteSecuence1 = new SpriteSequence(7, 0);
+            spriteSecuence1.StepTime = 400;
+            spriteSecuence1.SetFrame(0,new SpriteFrame(1));
+            spriteSecuence1.SetFrame(1, new SpriteFrame(1));
+            spriteSecuence1.SetFrame(2, new SpriteFrame(1));
+            spriteSecuence1.SetFrame(3, new SpriteFrame(1));
+            spriteSecuence1.SetFrame(4, new SpriteFrame(2));
+            spriteSecuence1.SetFrame(5, new SpriteFrame(3));
+            spriteSecuence1.SetFrame(6, new SpriteFrame(1));
+            spriteSecuences[0] = spriteSecuence1;
+
+            SpriteSequence spriteSecuence2 = new SpriteSequence(10, 0);
+            spriteSecuence2.StepTime = 90;
+            spriteSecuence2.SetFrame(0, new SpriteFrame(5));
+            spriteSecuence2.SetFrame(1, new SpriteFrame(6));
+            spriteSecuence2.SetFrame(2, new SpriteFrame(7));
+            spriteSecuence2.SetFrame(3, new SpriteFrame(8));
+            spriteSecuence2.SetFrame(4, new SpriteFrame(9));
+            spriteSecuence2.SetFrame(5, new SpriteFrame(10));
+            spriteSecuence2.SetFrame(6, new SpriteFrame(11));
+            spriteSecuence2.SetFrame(7, new SpriteFrame(12));
+            spriteSecuence2.SetFrame(8, new SpriteFrame(13));
+            spriteSecuence2.SetFrame(9, new SpriteFrame(14));
+
+            spriteSecuences[1] = spriteSecuence2;
+
+            SpriteLayer spLayer = new SpriteLayer(scatalog, spriteSecuences, 1.0f, true, new Vector2(10f), Vector2.One, Vector2.Zero, SpriteEffects.None, true, Anchor.None);
+            spLayer.CurrentSequence = 2;
+            SpriteScene spScene = new SpriteScene();
+            spScene.AddLayer(spLayer);
+            SpriteComponent spComponent = new SpriteComponent(this, spScene, baseScreenSize, resultionIndependent);
+            this.Components.Add(spComponent);
+
 
         }
 

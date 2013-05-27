@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using AzulEngine.EngineUtils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace AzulEngine.SpriteEngine
 {
@@ -34,23 +35,40 @@ namespace AzulEngine.SpriteEngine
         /// <summary>
         /// Obtiene o establece una colección de secuencias de cuadros
         /// </summary>
-        public SpriteSequence[] SpriteSecuence { get; set; }
+        public SpriteSequence[] SpriteSequences { get; set; }
 
 
-        private int currentSequence;
+        private int currentSequenceIndex;
         /// <summary>
-        /// Obtiene o establece la secuencia actual a dibujar
+        /// Obtiene o establece el indice de la secuencia actual a dibujar
         /// </summary>
         public int CurrentSequence {
             get
             {
-                return this.currentSequence;
+                return this.currentSequenceIndex;
             }
             set
             {
-                this.currentSequence = (int)MathHelper.Clamp(value, 0, this.SpriteSecuence.Length);
+                this.currentSequenceIndex = (int)MathHelper.Clamp(value, 0, this.SpriteSequences.Length);
             }
         }
+
+        /// <summary>
+        /// Obtiene o establece el ancla de la capa
+        /// </summary>
+        public Anchor Anchor { get; set; }
+
+
+        /// <summary>
+        /// Obtiene o establece el tiempo acumulado que se utiliza para calcular el tiempo de cambio de un cuadro en la secuencia.
+        /// </summary>
+        private float TotalElapsedTime; 
+
+        /// <summary>
+        /// Obtiene o establece un efecto de tipo Microsoft.Xna.Framework.Graphics.SpriteEffect, que 
+        /// rota la imagen 180 Grados
+        /// </summary>
+        public SpriteEffects SpriteEffects;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteLayer que permite
@@ -63,13 +81,41 @@ namespace AzulEngine.SpriteEngine
         /// <param name="position">Posición de la capa</param>
         /// <param name="zoomScale">Escala inicial de la capa</param>
         /// <param name="velocity">Velocidad de desplazamiento de la capa</param>
+        /// <param name="spriteEffects">Efecto de rotación sobre el sprite</param>
         /// <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
         /// <param name="direction">Dirección de desplazamiento de la capa cuando esta es independiente de la cámara</param>
-        public SpriteLayer(SpriteCatalog spriteCatalog, SpriteSequence[] spriteSecuence, float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, bool cameraIndependent, LayerMovementDirection direction)
+        public SpriteLayer(SpriteCatalog spriteCatalog, SpriteSequence[] spriteSecuence, float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, SpriteEffects spriteEffects, bool cameraIndependent, LayerMovementDirection direction)
             : base(transparency, visible, position, zoomScale, velocity, cameraIndependent, direction)
         {
             this.SpriteCatalog = spriteCatalog;
-            this.SpriteSecuence = spriteSecuence;
+            this.SpriteSequences = spriteSecuence;
+            this.Anchor = Anchor.None;
+            this.SpriteEffects = spriteEffects;
+            this.TotalElapsedTime = 0f;
+        }
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteLayer que permite
+        /// crear una instancia completa con transparencia, visibilidad, posición,escala,velocidad, independencia de cámara y un anclaje de eje
+        /// </summary>
+        /// <param name="spriteCatalog">Catálogo de cuadros</param>
+        /// <param name="spriteSecuence">Colección de secuencia de cuadros</param>
+        /// <param name="transparency">Transparencia de la capa</param>
+        /// <param name="visible">Visibilidad de la capa</param>
+        /// <param name="position">Posición de la capa</param>
+        /// <param name="zoomScale">Escala inicial de la capa</param>
+        /// <param name="velocity">Velocidad de desplazamiento de la capa</param>
+        /// <param name="spriteEffects">Efecto de rotación sobre el sprite</param>
+        /// <param name="cameraIndependent">Indica si la capa es independiente del movimiento de la cámara</param>
+        /// <param name="anchor">Anclaje del sprite</param>
+        public SpriteLayer(SpriteCatalog spriteCatalog, SpriteSequence[] spriteSecuence, float transparency, Boolean visible, Vector2 position, Vector2 zoomScale, Vector2 velocity, SpriteEffects spriteEffects, bool cameraIndependent, Anchor anchor)
+            : base(transparency, visible, position, zoomScale, velocity, cameraIndependent, LayerMovementDirection.None)
+        {
+            this.SpriteCatalog = spriteCatalog;
+            this.SpriteSequences = spriteSecuence;
+            this.Anchor = anchor;
+            this.SpriteEffects = spriteEffects;
+            this.TotalElapsedTime = 0f;
         }
 
         /// <summary>
@@ -79,7 +125,7 @@ namespace AzulEngine.SpriteEngine
         /// <param name="spriteCatalog">Cátalogo de cuadros </param>
         /// <param name="spriteSecuence">Secuencia de cuadros</param>
         public SpriteLayer(SpriteCatalog spriteCatalog, SpriteSequence[] spriteSecuence)
-            : this(spriteCatalog, spriteSecuence, 1.0f, true, Vector2.Zero, Vector2.One, Vector2.One, false, LayerMovementDirection.None)
+            : this(spriteCatalog, spriteSecuence, 1.0f, true, Vector2.Zero, Vector2.One, Vector2.One, SpriteEffects.None, false, LayerMovementDirection.None)
         {  }
 
         /// <summary>
@@ -108,5 +154,28 @@ namespace AzulEngine.SpriteEngine
                 return new Vector2(width, height);
             }
         }
+
+        public SpriteSequence GetCurrentSequence()
+        {
+            return this.SpriteSequences[this.currentSequenceIndex - 1];
+        }
+
+        public bool SpriteCollide(IGameElement gameElement)
+        {
+            return false;
+        }
+
+        public void UpdateFrame(float elapsedTime)
+        {
+            this.TotalElapsedTime += elapsedTime;
+            SpriteSequence spriteSequence = this.SpriteSequences[this.CurrentSequence - 1];
+            if (this.TotalElapsedTime > spriteSequence.StepTime)
+            {
+                this.TotalElapsedTime -= spriteSequence.StepTime;
+                spriteSequence.NextFrame();
+            }
+
+        }
+
     }
 }

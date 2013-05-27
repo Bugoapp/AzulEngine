@@ -33,10 +33,10 @@ namespace AzulEngine.SpriteEngine
         /// Inicializa una nueva instancia de la clase AzulEngine.SpriteEngine.SpriteFrame
         /// con el patrón especificado que indica el índice del cuadro.
         /// </summary>
-        /// <param name="type">Provides a snapshot of timing values.</param>
-        public SpriteFrame(Int32 type)
+        /// <param name="index">Indice del cuadro que apunta a un elemento dentro del catálogo</param>
+        public SpriteFrame(Int32 index)
         {
-            this.Index = type;
+            this.Index = index;
         }
     }
 }

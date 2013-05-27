@@ -75,6 +75,7 @@ namespace AzulEngine.TileEngine
         /// parametros la textura, una colección de rectángulos,el ancho y alto de la baldosa.
         /// </summary>
         /// <param name="texture">Textura que define el catálogo</param>
+        /// <param name="tilePositions">Diccionario que almacena el rectángulo de posición de cada baldosa</param>
         /// <param name="width">Ancho de una baldosa</param>
         /// <param name="height">Alto de una baldosa</param>
         public TileCatalog(Texture2D texture, Dictionary<int, Rectangle> tilePositions, int width, int height)
@@ -88,9 +89,9 @@ namespace AzulEngine.TileEngine
         /// Obtiene el rectángulo de la posicion de una baldosa dentro de la textura 
         /// dada una referencia de la misma
         /// </summary>
-        /// <param name="frame">Referencia de la baldosa de la que se obtendra la posición </param>
-        /// <param name="framePosition">Valor de salida que contiene el rectángulo de posición</param>
-        public void GetTilePosition(ref Tile tile, out Rectangle tilePosition)
+        /// <param name="tile">Referencia de la baldosa de la que se obtendra la posición </param>
+        /// <param name="tilePosition">Valor de salida que contiene el rectángulo de posición</param>
+        public void GetTilePosition(Tile tile, out Rectangle tilePosition)
         {
             tilePosition = TilePositions[tile.Index];
         }
@@ -100,7 +101,7 @@ namespace AzulEngine.TileEngine
         /// Agrega o modifica una nuevo índice a la colección de rectángulos de posición de baldosas
         /// </summary>
         /// <param name="index">Indice de la baldosa</param>
-        /// <param name="framePosition">Rectángulo que representa la posición de la baldosa</param>
+        /// <param name="tilePosition">Rectángulo que representa la posición de la baldosa</param>
         public void AddTilePosition(int index, Rectangle tilePosition)
         {
             this.TilePositions.Add(index, tilePosition);
@@ -114,7 +115,7 @@ namespace AzulEngine.TileEngine
         /// <param name="texture">Textura de la que se calculan los rectángulos de posición</param>
         /// <param name="width">Ancho de la baldosa</param>
         /// <param name="height">Alto de la baldosa</param>
-        /// <param name="framePositions">referencia de la colección de rectangulos de posición a devolver</param>
+        /// <param name="tilePositions">referencia de la colección de rectangulos de posición a devolver</param>
         public static void CalculateTilePositions(Texture2D texture, int width, int height, ref Dictionary<int, Rectangle> tilePositions)
         {
             //verificar si el ancho y alto son divisores del ancho y alto de las texturas

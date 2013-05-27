@@ -29,7 +29,7 @@ namespace AzulEngine.TileEngine
         /// <summary>
         /// Obtiene o establece un arreglo bidimensional de objetos AzulEngine.TileEngine.Tile
         /// </summary>
-        /// <returns>Retorna una instancia de un arreglo bidimensional de type AzulEngine.TileEngine.Tile</returns>
+        /// <returns>Retorna una instancia de un arreglo bidimensional de index AzulEngine.TileEngine.Tile</returns>
         internal Tile[][] Map
         {
             get { return map; }
@@ -57,9 +57,9 @@ namespace AzulEngine.TileEngine
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileMap que recibe
-        /// un arreglo bidimensional de type AzulEngine.TileEngine.Tile
+        /// un arreglo bidimensional de index AzulEngine.TileEngine.Tile
         /// </summary>
-        /// <param name="map">arreglo bidimensional de type AzulEngine.TileEngine.Tile</param>
+        /// <param name="map">arreglo bidimensional de index AzulEngine.TileEngine.Tile</param>
         public TileMap(Tile[][] map)
         {
             this.map = map;
@@ -81,7 +81,7 @@ namespace AzulEngine.TileEngine
         /// </summary>
         /// <param name="xPosition">Número de fila donde se posiciona la baldosa</param>
         /// <param name="yPosition">Número de columna donde se posiciona la baldosa</param>
-        /// <returns>Retorna una instancia de type AzulEngine.TileEngine.Tile</returns>
+        /// <returns>Retorna una instancia de index AzulEngine.TileEngine.Tile</returns>
         public Tile GetTile(int xPosition, int yPosition)
         {
             return this.map[xPosition][yPosition];

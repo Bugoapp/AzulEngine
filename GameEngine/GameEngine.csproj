@@ -62,6 +62,7 @@
     <Compile Include="EngineUtils\AbstractLayer.cs" />
     <Compile Include="EngineUtils\AbstractScene.cs" />
     <Compile Include="EngineUtils\Anchor.cs" />
+    <Compile Include="EngineUtils\IGameComponent.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,6 +108,9 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\megax.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\tex.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

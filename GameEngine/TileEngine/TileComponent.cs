@@ -33,7 +33,7 @@ namespace AzulEngine.TileEngine
         /// Inicializa una nueva instancia de la clase AzulEngine.TileEngine.TileComponent que recibe como
         /// parametros el objeto Game, la escena, la resolucion base y si es dependiente de la resolucion del sistema.
         /// </summary>
-        /// <param name="game">Objeto type Game que representa el type principal del juego</param>
+        /// <param name="game">Objeto index Game que representa el index principal del juego</param>
         /// <param name="scene">Representa un conjunto de capas de baldosas</param>
         /// <param name="baseScreenSize">Resolución base en un sistema de resolución independiente</param>
         /// <param name="resultionIndependent">Indica la resolución del juego si es independiente de la resolución del sistema</param>
@@ -92,15 +92,16 @@ namespace AzulEngine.TileEngine
                 {
                     Point layerLenght = layer.Lenght;
                     TileMap tileMap = layer.TileMap;
-
                     TileDrawLimits drawLimits = this.GetDrawLimits(layer, clientBounds);
-
                     TileCatalog tileCatalog = layer.TileCatalog;
+
                     for (int j = drawLimits.YMin; j < drawLimits.YMax; j++)
                     {
                         for (int i = drawLimits.XMin; i < drawLimits.XMax; i++)
                         {
-                            Rectangle sourceTile = tileCatalog.TilePositions[tileMap.GetTile(i, j).Index];
+                            Rectangle sourceTile;
+                            tileCatalog.GetTilePosition(tileMap.GetTile(i, j), out sourceTile);    
+        
                             //calcular la posicion de cada frame donde corresponde, multiplicando el numero de turno por su tamaño
                             //pe. x = 5 * 10 = 50
                             Vector2 tileAbsolutePosition = Vector2.Multiply( Vector2.Multiply(new Vector2(i, j), layer.ScaledTileSize),camera.Zoom) ;
@@ -129,7 +130,7 @@ namespace AzulEngine.TileEngine
         /// </summary>
         /// <param name="layer">Capa de baldosas que se va a limitar</param>
         /// <param name="clientBounds">Rectángulo que representa los limites que definirán el cálculo</param>
-        /// <returns>Retorna un objeto de type AzulEngine.TileEngine.TileDrawLimits</returns>
+        /// <returns>Retorna un objeto de index AzulEngine.TileEngine.TileDrawLimits</returns>
         public TileDrawLimits GetDrawLimits(TileLayer layer, Rectangle clientBounds)
         {
             int[] xLimit = this.GetAxisLimit(layer.Position.X, layer.ScaledSize.X * camera.Zoom.X, layer.ScaledTileSize.X * camera.Zoom.X, layer.Lenght.X, clientBounds.Width);
